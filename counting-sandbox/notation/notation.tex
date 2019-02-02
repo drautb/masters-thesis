@@ -1,0 +1,119 @@
+\documentclass[a4paper]{article}
+
+%% Language and font encodings
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+
+\usepackage{booktabs}
+\usepackage{tabu}
+\usepackage[T1]{fontenc}
+
+%% Sets page size and margins
+\usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+%% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+%\usepackage{apacite}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+\title{Notation for Solution Counting}
+\author{Ben Draut \\ u1066504}
+\date{\today}
+
+\begin{document}
+
+\section{Names and Symbols}
+
+A Block contains a set of factors, (design) a set of factors to cross with each other (crossing), and a set of constraints.
+
+Let $D$ be the set of factors in the design. \newline
+
+Let $X$ be the set of factors in the crossing. \newline
+
+Let $C$ be the set of constraints. \newline
+
+Let $\overline{X}$ denote the factors in the design which are \textit{not} in the crossing. \newline
+
+The number of factors/levels in $X$ determines the length of the generated trial sequences, denoted $l$. \newline
+
+Lemmas:
+
+\begin{enumerate}
+\item $X \subseteq D$
+\item $X \cup \overline{X} = D$
+\item $X \cap \overline{X} = \emptyset$
+\end{enumerate}
+
+For a given factor $f$, let $|f|$ denote the number of possible settings (levels) for $f$.
+
+\section{Counting Solutions}
+
+\subsection{Simple Factors Only}
+
+This section is limited to designs with only factors that are simple, meaning not derived. (Not dependent on other factors)
+
+So far, this all assumes simple factors, meaning windows with length and stride of 1.
+Let $S$ be the set of all valid trial sequences for a given block. We wish to compute $|S|$.
+
+When $C \equiv \emptyset$:
+
+\[
+    |S|= {l!}  {\prod_{f \in \overline{X}} {|f|}^l}
+\]
+
+Or simply: $l!$ when $\overline{X} \equiv \emptyset$.
+
+\subsubsection{Constraints}
+
+Only two constraints exist right now: \texttt{AtMostKInARow} and \texttt{ExactlyKInARow}. Exactly K is a special case of AtMostK too, so this should resolve to a single formula?
+
+\begin{itemize}
+\item \texttt{AtMostKInARow($k$, $f_v$)}
+\item \texttt{ExactlyKInARow($k$, $f_v$)}
+\end{itemize}
+
+Where $k$ is the integer sequence limit for the level being constrained, and $f_v$ denotes the level $v$ in factor $f$ being constrained.
+
+Each constraint defines an equivalence relation on $S$, which in turn defines a set partition containing two subsets, $A$ and $B$. $A \subseteq S$, while $B \not\subseteq S$.
+
+Let $Q$ be the set of all sets defined by constraints in $C$ to not be in $S$. In otherwords:
+
+\[
+    \forall c \in C \text{, } c \to \begin{cases}
+      A \mid A \subseteq S\\
+      B \mid B \not\subseteq S
+    \end{cases}
+\]
+
+
+Then:
+
+\[
+    Q = \{{ B_1, B_2, ..., B_i\}}
+\]
+
+Where $i = |C|$.
+
+Assuming that all $B_i$, $B_n$ are disjoint:
+
+\[
+    |S| = {l!} {\prod_{f \in \overline{X}} {|f|}^l} - \sum_{q \in Q} {|q|}
+\]
+
+But how can we count $|B|$?
+
+Because all factors/levels in $X$ are being fully crossed, we can compute the number of times $v$ may appear in a sequence, denoted $|v|$.
+
+\[
+    |v| = \frac{l}{|f|}
+\]
+
+For each sublength $s$ in $[k+1, |v|]$, how many subsequences of length $s$ can $l$ contain? Denoted $n$. (If $l = 4$ and $s = 2$, then $n = 3$)
+
+With that, $|B| = nl$. (I think, need to do some more tests)
+
+But it will rarely be this simple, since multiple constraints will almost always overlap, right?
+
+\end{document}
