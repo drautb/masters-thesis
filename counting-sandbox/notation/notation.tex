@@ -104,15 +104,25 @@ Assuming that all $B_i$, $B_n$ are disjoint:
 
 But how can we count $|B|$?
 
-Because all factors/levels in $X$ are being fully crossed, we can compute the number of times $v$ may appear in a sequence, denoted $|v|$.
+Because all factors/levels in $X$ are being fully crossed, (this won't be true when specific crossings are excluded) we can compute the number of times $v$ may appear in a sequence, denoted $|v|$.
 
 \[
     |v| = \frac{l}{|f|}
 \]
 
-For each sublength $s$ in $[k+1, |v|]$, how many subsequences of length $s$ can $l$ contain? Denoted $n$. (If $l = 4$ and $s = 2$, then $n = 3$)
+For each sublength $u$ in $(k, |v|]$, how many subsequences of length $s$ can $l$ contain? Denoted $n$. (If $l = 4$ and $u = 2$, then $n = 3$)
 
-With that, $|B| = nl$. (I think, need to do some more tests)
+It's more like this:
+
+How many unique ways can you arrange $|v|$ items in a sequence of $l$ entries where there is at least one subsequnce that is at least $k$ consecutive elements.
+
+With that, $|B| = nl$. (I think.) So:
+
+\[
+    |B| = \sum_{u \in L} ul
+\]
+
+Where $L$ is the range $(k, |v|]$.
 
 But it will rarely be this simple, since multiple constraints will almost always overlap, right?
 

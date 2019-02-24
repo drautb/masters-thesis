@@ -1,5 +1,6 @@
 from sweetpea import fully_cross_block, save_cnf, synthesize_trials_non_uniform
 from sweetpea.primitives import Factor
+from sweetpea.constraints import AtMostKInARow
 
 
 # Stroop 2 Basic
@@ -38,3 +39,42 @@ crossing = [color, text]
 block = fully_cross_block(design, crossing, [])
 
 save_cnf(block, "stroop-2-with-2-directions-3-letters-31104.cnf")
+
+
+# Stroop 3 with 1 constraint
+color_list = ["red", "orange", "blue"]
+color = Factor("color", color_list)
+text  = Factor("text",  color_list)
+design = [color, text]
+crossing = [color, text]
+constraints = [AtMostKInARow(1, ("color", "red"))]
+block = fully_cross_block(design, crossing, constraints)
+
+save_cnf(block, "stroop-3-with-1-red-constraint.cnf")
+
+
+# Stroop 4 with 1 constraint
+color_list = ["red", "orange", "blue", "green"]
+color = Factor("color", color_list)
+text  = Factor("text",  color_list)
+design = [color, text]
+crossing = [color, text]
+constraints = [AtMostKInARow(1, ("color", "red"))]
+block = fully_cross_block(design, crossing, constraints)
+
+save_cnf(block, "stroop-4-with-1-red-constraint.cnf")
+
+
+# Stroop 5 with 1 constraint
+color_list = ["red", "orange", "blue", "green", "yellow"]
+color = Factor("color", color_list)
+text  = Factor("text",  color_list)
+design = [color, text]
+crossing = [color, text]
+constraints = [AtMostKInARow(1, ("color", "red"))]
+block = fully_cross_block(design, crossing, constraints)
+
+save_cnf(block, "stroop-5-with-1-red-constraint.cnf")
+
+
+
