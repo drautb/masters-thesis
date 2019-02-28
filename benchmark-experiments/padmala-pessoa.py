@@ -24,15 +24,15 @@ reward      = Factor("reward",     ["rewarded", "non-rewarded"])
 response    = Factor("response",   ["building", "house"])
 
 congruency_transition = Factor("congruency_transition", [
-    DerivedLevel("congruent-congruent",     Transition(lambda c: c[0] == "congruent"   and c[1] == "congruent",   [congruency])),
-    DerivedLevel("congruent-incongruent",   Transition(lambda c: c[0] == "congruent"   and c[1] == "incongruent", [congruency])),
-    DerivedLevel("congruent-neutral",       Transition(lambda c: c[0] == "congruent"   and c[1] == "neutral",     [congruency])),
-    DerivedLevel("incongruent-congruent",   Transition(lambda c: c[0] == "incongruent" and c[1] == "congruent",   [congruency])),
-    DerivedLevel("incongruent-incongruent", Transition(lambda c: c[0] == "incongruent" and c[1] == "incongruent", [congruency])),
-    DerivedLevel("incongruent-neutral",     Transition(lambda c: c[0] == "incongruent" and c[1] == "neutral",     [congruency])),
-    DerivedLevel("neutral-congruent",       Transition(lambda c: c[0] == "neutral"     and c[1] == "congruent",   [congruency])),
-    DerivedLevel("neutral-incongruent",     Transition(lambda c: c[0] == "neutral"     and c[1] == "incongruent", [congruency])),
-    DerivedLevel("neutral-neutral",         Transition(lambda c: c[0] == "neutral"     and c[1] == "neutral",     [congruency]))
+    DerivedLevel("c-c", Transition(lambda c: c[0] == "congruent"   and c[1] == "congruent",   [congruency])),
+    DerivedLevel("c-i", Transition(lambda c: c[0] == "congruent"   and c[1] == "incongruent", [congruency])),
+    DerivedLevel("c-n", Transition(lambda c: c[0] == "congruent"   and c[1] == "neutral",     [congruency])),
+    DerivedLevel("i-c", Transition(lambda c: c[0] == "incongruent" and c[1] == "congruent",   [congruency])),
+    DerivedLevel("i-i", Transition(lambda c: c[0] == "incongruent" and c[1] == "incongruent", [congruency])),
+    DerivedLevel("i-n", Transition(lambda c: c[0] == "incongruent" and c[1] == "neutral",     [congruency])),
+    DerivedLevel("n-c", Transition(lambda c: c[0] == "neutral"     and c[1] == "congruent",   [congruency])),
+    DerivedLevel("n-i", Transition(lambda c: c[0] == "neutral"     and c[1] == "incongruent", [congruency])),
+    DerivedLevel("n-n", Transition(lambda c: c[0] == "neutral"     and c[1] == "neutral",     [congruency]))
 ])
 
 response_transition = Factor("resp_transition", [
@@ -41,16 +41,15 @@ response_transition = Factor("resp_transition", [
 ])
 
 k = 7
-constraints = [AtMostKInARow(k, congruency_transition),
-               AtMostKInARow(k, response_transition)]
+constraints = [AtMostKInARow(k, congruency_transition)]
+design      = [congruency, reward, response, congruency_transition]
 
-design       = [congruency, reward, response, congruency_transition, response_transition]
-crossing     = [congruency, reward, response, congruency_transition]
+# Crossing with congruency and congruency_transition is impossible because
+# it's impossible to have 'neutral' match with any transition, except for those ending in neutral.
+# It's impossible to cross 'congruent' with 'con-inc'.
+crossing     = [reward, response, congruency_transition]
 block        = fully_cross_block(design, crossing, constraints)
 
 print_encoding_diagram(block)
 metrics = collect_design_metrics(block)
 
-# experiments  = synthesize_trials_non_uniform(block, 5)
-
-# print_experiments(block, experiments)
