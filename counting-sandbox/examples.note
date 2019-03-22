@@ -1,0 +1,145 @@
+Counting Examples
+=================
+
+This file just has a few basic examples of designs that exercise different 
+aspects of the counting/generation algorithm.
+
+Everything in here assumes that we're not dealing with complex windows (yet). 
+All factors are either basic, or derived with a `WithinTrial` window. Nothing 
+more.
+
+It also assumes that we're ignoring the `constraints` list, if one exists. We 
+can revisit that once the counting is solid.
+
+
+## Example #1: Stroop 2
+
+This example is the most basic, when the design and the crossing are equivalent.
+Generating permutations of the crossing is sufficient to cover all possibilities.
+
+```python
+color = Factor("color", ["red", "blue"])
+text  = Factor("text",  ["red", "blue"])
+
+design   = [color, text]
+crossing = [color, text]
+```
+
+Total solutions: 4! = 24
+
+
+## Example #2: Stroop 2, Congruency
+
+This adds to example #1 by introducing the congruency factor. Because the only
+factor _not_ in the crossing is derived, it is ignored, and counting/generation
+proceed normally.
+
+```python
+color      = Factor("color",      ["red", "blue"])
+text       = Factor("text",       ["red", "blue"])
+congruency = Factor("congruency", [
+    DerivedLevel("congruent",   WithinTrial(op.eq, [color, text])),
+    DerivedLevel("incongruent", WithinTrial(op.ne, [color, text]))
+])
+
+design   = [color, text, congruency]
+crossing = [color, text]
+```
+
+Total Solutions: 4! = 24
+
+
+## Example #3: Stroop 2, Congruency in Crossing
+
+This is the same as example #2, except that we've replaced `text` with 
+`congruency` in the crossing. Theoretically this changes the counting/generation
+process. However, in this case it remains the same.
+
+```python
+color      = Factor("color",      ["red", "blue"])
+text       = Factor("text",       ["red", "blue"])
+congruency = Factor("congruency", [
+    DerivedLevel("congruent",   WithinTrial(op.eq, [color, text])),
+    DerivedLevel("incongruent", WithinTrial(op.ne, [color, text]))
+])
+
+design   = [color, text, congruency]
+crossing = [color, congruency]
+```
+
+Total Solutions: 4! = 24
+
+
+## Example #4: Stroop 2, Congruency, Uncrossed Factor
+
+This is the sampe as example #2, except we've added a fourth factor that is not 
+tied to the other factors at all. The usual 24 permutations must be combined
+with all possible values for this new factor.
+
+```python
+color      = Factor("color",      ["red", "blue"])
+text       = Factor("text",       ["red", "blue"])
+congruency = Factor("congruency", [
+    DerivedLevel("congruent",   WithinTrial(op.eq, [color, text])),
+    DerivedLevel("incongruent", WithinTrial(op.ne, [color, text]))
+])
+
+direction  = Factor("direction",  ["up", "down"])
+
+design   = [color, text, congruency, direction]
+crossing = [color, text]
+```
+
+Total Solutions: 4! * 2^4 = 24 * 16 = 384
+
+
+## Example #5: Stroop 2, Congruency and Direction in Crossing
+
+Start with example #4, but put congruency and direction in the crossing, instead
+of color and text. This creates the scenario where a derived factor in the 
+crossing depends on 2 (or more) basic factors that are _not_ in the crossing.
+The counting/generation process must exclude combinations of the two basic 
+factors that do not satisfy the derived factor.
+
+```python
+color      = Factor("color",      ["red", "blue"])
+text       = Factor("text",       ["red", "blue"])
+congruency = Factor("congruency", [
+    DerivedLevel("congruent",   WithinTrial(op.eq, [color, text])),
+    DerivedLevel("incongruent", WithinTrial(op.ne, [color, text]))
+])
+
+direction  = Factor("direction",  ["up", "down"])
+
+design   = [color, text, congruency, direction]
+crossing = [congruency, direction]
+```
+
+Total Solutions: 384
+
+
+## Example #6: Stroop 3, Less Rigid Derivation
+
+Start with example 3, but add a third level to text. This will increase the 
+number of ways to produce an incongruent trial, and make the design less 
+symmetric. (More interesting)
+
+```python
+color      = Factor("color",      ["red", "blue"])
+text       = Factor("text",       ["red", "blue", "green"])
+congruency = Factor("congruency", [
+    DerivedLevel("congruent",   WithinTrial(op.eq, [color, text])),
+    DerivedLevel("incongruent", WithinTrial(op.ne, [color, text]))
+])
+
+design   = [color, text, congruency]
+crossing = [color, congruency]
+```
+
+Total Solutions: 96
+
+
+## Example #?: Stroop 2...
+
+This example needs to demonstrate two (or more) derived factors in the crossing
+that have at least one dependency (basic factor) in common.
