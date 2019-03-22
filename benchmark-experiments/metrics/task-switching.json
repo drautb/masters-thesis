@@ -1,0 +1,12 @@
+{
+  "block_length": 32,
+  "block_length_factorial": 263130836933693530167218012160000000,
+  "cnf_total_clauses": 62700,
+  "cnf_total_variables": 14246,
+  "constraint_count": 12,
+  "crossing_factor_count": 3,
+  "full_factor_count": 7,
+  "full_set_count": 384566149010843916606435130661114286360958999208446829239965392267500490588160000000,
+  "low_level_request_count": 254,
+  "prohibited_sequences": 0
+}
