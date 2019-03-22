@@ -1,0 +1,102 @@
+%%% -*-LaTeX-*-
+
+\chapter{Motivation}
+
+% This is a chapter.  Remember  that there should \emph{always}
+% be at least of few lines of prose after each sectional heading:
+% failure to do so is a disservice to your readers, and also
+% produces incorrect vertical spacing.
+
+% TODO: Update this to talk about guided sampling.
+\textbf{SweetPea} \cite{annie}, a language for experimental design, attempts to generate approximately uniformly sampled trial sequences by relying on the aid of a SAT-sampler to provide uniformity guarantees. In practice, this approach does not scale to support realistic experimental designs. This thesis presents evidence demonstrating the need for an alternative and investigates other approaches to overcome this problem. These include a different encoding scheme as well as techniques for direct construction of a solution based on its numerical index in the sequence of all solutions. These improvements significantly improve SweetPea's capability to guarantee a uniform sampling of trial sequences.
+
+\section{Introduction}
+
+For any valid design configuration, there exists some set of trial sequences that conform to the design. Typically this set is extremely large, as the size grows factorially in the trial sequence length of the design. The magnitude of the solution space for experimental designs has posed a significant challenge for scientists desiring to conduct unbiased resarch.
+
+At present, scientists patch together different scripts and tools in various ways to generate experiment trial sequences. This method, in addition to being brittle, does not facilitate sharing, nor does it produce unbiased sequences, making it nearly impossible for peers to replicate results. SweetPea provides a high-level declarative language for describing all aspects of an experimental design, providing standard tooling where before there was none. In addition, with the aid of a SAT-sampler, it generates approximately uniformly sampled trial sequences from the space of all sequences conforming to the design. SweetPea is composed of a Python library, which provides the language constructs, and a server that generates and processes the design using a SAT-sampler.
+
+At the highest level, an experimental design is composed of a \textit{block}, whose properties may vary depending on its type. At present, only a single block type is provided by SweetPea, which is the \textit{FullyCrossBlock}. A \texttt{FullyCrossBlock} is composed of a set of \textit{factors}, a set of \textit{constraints}, and a \textit{crossing}. A \textit{factor} is a collection of \textit{levels}, or values to which the factor may be set. In a given trial, each factor takes the value of one of its levels. Levels may be values determined by the designer, or they may be derived from the values of other factors in the design. A \textit{constraint} constrains the experiment in some regard. For example, the designer may wish to prohibit a particular level from being repeated in a trial sequence. Lastly, the \textit{crossing} identifies the factors whose levels should be combined (crossed) in all possible ways in each trial sequence. The output of a design is a set of trial sequences. A single level value from each factor comprises a \textit{trial}.
+
+
+\section{Current Implementation}
+
+SweetPea works by encoding the experimental design in a boolean satisfiability (also known as SAT) formula. such that any satisfying assignment constitutes a trial sequence that conforms to the design. Currently, a simple positional encoding is used, in which every level of every factor of every trial is represented as a distinct variable.
+
+\subsection{Boolean Satisfiability}
+
+The Boolean satisfiability problem (abbreviated SAT) is the problem of determining whether or not a Boolean formula can be satisfied, or be caused to evaluate to true, by a particular true or false assignment to each of its variables. If a problem can be expressed as a Boolean formula, then techniques from satisfiability theory may be applied to determine whether or not a solution exists to the problem, or to locate a particular solution. Many different SAT solvers exist which accept a Boolean formula as input, and output either that the formula is \textit{unsatisfiable}, or a solution to the formula.
+
+Tools for interacting with SAT formulae typically require the input formula to be in \textit{conjunctive normal form} (abbreviated CNF), which is a form of a Boolean formula with specific properties. A Boolean formula is in conjunctive normal form only when three conditions are met. First, the entire formula must be a conjunction of clauses. Second, each clause consists of an individual variable, or a disjunction of variables. Third, negation may only be applied to individual variables. Any Boolean formula may be expressed in conjunctive normal form, though it usually requires growth in some dimension. SweetPea uses the Tseitin Transformation \cite{tseitin1983complexity} to do this conversion, which has the tightest known bounds on formula length, at the expense of allocating additional variables. A SAT formula contains some number of boolean variables and propositional logic clauses. A selection of true or false for each variable in the formula constitutes an \textit{assignment}. If a given assignment causes the entire formula to be true, then the formula is said to be \textit{satisfied} by that assignment, or more generally, the formula is \textit{satisfiable}. If no such assignment exists, the formula is said to be \textit{unsatisfiable}.
+
+\subsection{Example: Stroop Experiment}
+
+The Stroop test \cite{TODO} is a well-known design among experimental psychologists in which a subject's reaction time is influenced by perceived conflicts in the trial sequence. For example, a subject may be shown printed words representing colors and asked to read the word. However, some of the time the font color of the word will be different than the printed word itself, leading to a delayed reaction due to the conflict. This design is easily represented in SweetPea as follows:
+
+\begin{verbatim}
+color = Factor("color", ["red", "green", "blue"])
+text  = Factor("text",  ["red", "green", "blue"])
+\end{verbatim}
+
+A \texttt{FullyCrossBlock} with these two factors will yield a sequence of $3 \cdot 3 = 9$ trials. A research may want to constrain the design to ensure that there are never two consective trials in which the color and text are the same, or congruent. Such a constraint requires the addition of another factor:
+
+\begin{verbatim}
+congruent = Factor("congruent?", [
+    DerivedLevel("yes", WithinTrial(operator.eq, [color, text])),
+    DerivedLevel("no",  WithinTrial(operator.ne, [color, text]))
+])
+\end{verbatim}
+
+With the factor now in place, a constraint may be specified:
+
+\begin{verbatim}
+AtMostKInARow(1, ("congruent?", "yes"))
+\end{verbatim}
+
+The current encoding scheme will allocate 72 variables to represent each level of each factor in each trial. Additional variables will be allocated to enforce other constraints, such as ensuring that each factor takes only one level in each trial, and requiring that each crossing be present in the sequence. The first step of the encoding can be visualized easily:
+
+% TODO: Replace with real table.
+\begin{verbatim}
+----------------------------------------------------------
+|   Trial |     color      |      text      | congruent? |
+|       # | red green blue | red green blue |  yes   no  |
+----------------------------------------------------------
+|       1 |  1    2    3   |  4    5    6   |   7    8   |
+|       2 |  9   10    11  | 12   13    14  |  15    16  |
+|       3 | 17   18    19  | 20   21    22  |  23    24  |
+|       4 | 25   26    27  | 28   29    30  |  31    32  |
+|       5 | 33   34    35  | 36   37    38  |  39    40  |
+|       6 | 41   42    43  | 44   45    46  |  47    48  |
+|       7 | 49   50    51  | 52   53    54  |  55    56  |
+|       8 | 57   58    59  | 60   61    62  |  63    64  |
+|       9 | 65   66    67  | 68   69    70  |  71    72  |
+----------------------------------------------------------
+\end{verbatim}
+
+For example, if variable 68 is true, that corresponds to the level \texttt{red} being selected for the factor \texttt{text} in trial number 9. The encoding will also require variables 69 and 70 to be false in this case, as well as require variable 71 to be equivalent to 65. Once a solution is found, it is then decoded back into the original language of the design as a trial sequence. For more details concerning SweetPea's syntax or the current encoding scheme, the reader is referred to the original paper.
+
+
+\section{Problems}
+
+SweetPea sounds panacean, but it has yet to fully realize its objectives. It relies \textit{fully} on a SAT-sampler to approximately uniformly sample some number of solutions to the generated formula. In practice, this works wonderfully for \textit{small} experimental designs, where \textit{small} means designs in which the trial sequence length is less than ten. However, realistic experimental designs are significantly larger, often with trial sequence lengths in the tens or hundreds.
+
+A solution to the formula represents a unique trial \textbf{sequence} in the design. Therefore every possible sequence permutation (so long as it upholds the design constraints) is also a distinct solution. Consequentially, the number of solutions grows factorially in the sequence length. In the above example, the sequence length, denoted $l$, was $9$. Assuming the congruence constraint were removed, there would be $9! = 362,880$ solutions, which is still reasonable. Consider an experiment however in which $l = 36$. The solution count grows to $36! \approx 2^{138}$, which is intractable.
+
+% TODO: Replace with real table.
+\begin{verbatim}
+--------------------------------------------------------------------
+| Sequence Length (l) |                 #SAT (l!)                  |
+|---------------------|--------------------------------------------|
+|                   4 |                                         24 |
+|                   6 |                                        720 |
+|                   9 |                                     362880 |
+|                  12 |                                  479001600 |
+|                  16 |                             20922789888000 |
+|                  20 |                        2432902008176640000 |
+|                  25 |                 15511210043330985984000000 |
+|                  30 |          265252859812191058636308480000000 |
+|                  36 | 371993326789901217467999448150835200000000 |
+--------------------------------------------------------------------
+\end{verbatim}
+
+In practice, designs will be constrained, however the constraints only exlude specific patterns in the permutations, therefore the number of solutions remains dominated by $l!$. This growth rate very quickly overwhelms all tested SAT-samplers. Therefore, the current stategy to fully relying on a SAT-sampler to pick apart the entire solution space is flawed. Although the total number of variables and clauses in the formula is reasonable, the overall number of solutions is not.

@@ -1,0 +1,54 @@
+\contentsline {chapter}{\uppercase {Abstract}}{iii}
+\contentsline {chapter}{LIST OF FIGURES}{vii}
+\contentsline {chapter}{LIST OF TABLES}{viii}
+\contentsline {chapter}{\uppercase {Notation and Symbols}}{ix}
+\unhbox \voidb@x \\[-1.2ex] \kern -1.5em\contentsline {}{\textbf {CHAPTERS}}{}
+\contentsline {chapter}{\numberline {1.}\hyphenpenalty =10000\exhyphenpenalty =10000\relax \linepenalty =0 \uppercase {Motivation}\global \uuthesis@needtocspacetrue }{1}
+\ifuuthesis@needtocspace \vspace {\uuthesis@chaptersectionspace } \fi \global \uuthesis@needtocspacefalse 
+\contentsline {section}{\numberline {1.1}Introduction}{1}
+\contentsline {section}{\numberline {1.2}Current Implementation}{2}
+\contentsline {subsection}{\numberline {1.2.1}Boolean Satisfiability}{2}
+\contentsline {subsection}{\numberline {1.2.2}Example: Stroop Experiment}{3}
+\contentsline {section}{\numberline {1.3}Problems}{4}
+\contentsline {chapter}{\numberline {2.}\hyphenpenalty =10000\exhyphenpenalty =10000\relax \linepenalty =0 \uppercase {Current Benchmarks}\global \uuthesis@needtocspacetrue }{6}
+\ifuuthesis@needtocspace \vspace {\uuthesis@chaptersectionspace } \fi \global \uuthesis@needtocspacefalse 
+\contentsline {section}{\numberline {2.1}Tool Overview}{6}
+\ifuuthesis@needtocspace \vspace {\uuthesis@chaptersectionspace } \fi \global \uuthesis@needtocspacefalse 
+\contentsline {subsection}{\numberline {2.1.1}CryptoMiniSat}{6}
+\ifuuthesis@needtocspace \vspace {\uuthesis@chaptersectionspace } \fi \global \uuthesis@needtocspacefalse 
+\contentsline {subsection}{\numberline {2.1.2}Unigen}{6}
+\ifuuthesis@needtocspace \vspace {\uuthesis@chaptersectionspace } \fi \global \uuthesis@needtocspacefalse 
+\contentsline {subsection}{\numberline {2.1.3}KUS}{7}
+\ifuuthesis@needtocspace \vspace {\uuthesis@chaptersectionspace } \fi \global \uuthesis@needtocspacefalse 
+\contentsline {subsection}{\numberline {2.1.4}Spur}{7}
+\contentsline {section}{\numberline {2.2}Experiments}{7}
+\contentsline {section}{\numberline {2.3}Benchmarks}{8}
+\contentsline {subsection}{\numberline {2.3.1}CryptoMiniSat}{8}
+\contentsline {subsection}{\numberline {2.3.2}Unigen}{8}
+\contentsline {subsection}{\numberline {2.3.3}KUS}{8}
+\contentsline {subsection}{\numberline {2.3.4}Spur}{8}
+\contentsline {section}{\numberline {2.4}Distribution of Samples}{8}
+\contentsline {subsection}{\numberline {2.4.1}Unigen}{11}
+\contentsline {subsection}{\numberline {2.4.2}KUS}{11}
+\contentsline {subsection}{\numberline {2.4.3}Spur}{11}
+\contentsline {subsection}{\numberline {2.4.4}CryptoMiniSat}{11}
+\contentsline {section}{\numberline {2.5}Summary}{11}
+\contentsline {chapter}{\numberline {3.}\hyphenpenalty =10000\exhyphenpenalty =10000\relax \linepenalty =0 \uppercase {A Complexity Spectrum for SweetPea designs}\global \uuthesis@needtocspacetrue }{16}
+\ifuuthesis@needtocspace \vspace {\uuthesis@chaptersectionspace } \fi \global \uuthesis@needtocspacefalse 
+\contentsline {section}{\numberline {3.1}Factors and Windows}{16}
+\ifuuthesis@needtocspace \vspace {\uuthesis@chaptersectionspace } \fi \global \uuthesis@needtocspacefalse 
+\contentsline {subsection}{\numberline {3.1.1}Factor Types}{16}
+\ifuuthesis@needtocspace \vspace {\uuthesis@chaptersectionspace } \fi \global \uuthesis@needtocspacefalse 
+\contentsline {subsection}{\numberline {3.1.2}Window Construction}{17}
+\contentsline {section}{\numberline {3.2}Complexity Gradation}{18}
+\contentsline {subsection}{\numberline {3.2.1}Level 1}{18}
+\contentsline {subsection}{\numberline {3.2.2}Level 2}{18}
+\contentsline {subsection}{\numberline {3.2.3}Level 3}{18}
+\contentsline {subsection}{\numberline {3.2.4}Level 4}{19}
+\contentsline {subsection}{\numberline {3.2.5}Level 5}{19}
+\contentsline {chapter}{\numberline {4.}\hyphenpenalty =10000\exhyphenpenalty =10000\relax \linepenalty =0 \uppercase {Solution Counting}\global \uuthesis@needtocspacetrue }{20}
+\ifuuthesis@needtocspace \vspace {\uuthesis@chaptersectionspace } \fi \global \uuthesis@needtocspacefalse 
+\contentsline {section}{\numberline {4.1}Principles of Counting}{20}
+\contentsline {section}{\numberline {4.2}Partition of an Experimental Design}{21}
+\contentsline {section}{\numberline {4.3}Formula}{22}
+\contentsline {chapter}{REFERENCES}{24}

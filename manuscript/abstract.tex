@@ -1,0 +1,13 @@
+%%% -*-LaTeX-*-
+%%% This is the abstract for the thesis.
+%%% It is included in the top-level LaTeX file with
+%%%
+%%%    \preface    {abstract} {Abstract}
+%%%
+%%% The first argument is the basename of this file, and the
+%%% second is the title for this page, which is thus not
+%%% included here.
+%%%
+%%% The text of this file should be about 350 words or less.
+
+SweetPea, a language for experimental design, attempts to generate approximately uniformly sampled trial sequences by relying on the aid of the SAT-sampler \texttt{unigen} to provide uniformity guarantees. In practice, this approach does not scale to support realistic experimental designs. The current positional encoding scheme embeds every allowed permutation of trial sequences as a unique solution. Therefore, the solution space grows factorially in the sequence length. Solution spaces of such magnitude are beyond the capabilities of current SAT-samplers to handle. This thesis presents evidence demonstrating the need for an alternative and investigates an alternative encoding, based on a bijection from natural numbers to valid trial sequences.
