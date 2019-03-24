@@ -4,3 +4,5 @@
 \contentsline {table}{\numberline {2.4}{\ignorespaces d-DNNF Compilation for Sampling with KUS}}{10}
 \contentsline {table}{\numberline {2.5}{\ignorespaces Time to Generate 10 Samples with KUS}}{10}
 \contentsline {table}{\numberline {2.6}{\ignorespaces Time to Generate 10 Samples with Spur}}{10}
+\contentsline {table}{\numberline {5.1}{\ignorespaces Benchmark Experiments}}{32}
+\contentsline {table}{\numberline {5.2}{\ignorespaces Sampling Metrics}}{32}

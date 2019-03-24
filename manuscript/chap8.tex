@@ -1,0 +1,12 @@
+%%% -*-LaTeX-*-
+
+\chapter{Conclusion}
+
+The current implementation of SweetPea, a language for experimental design, provides a useful standard for defining experimental designs, but has as yet failed to achieve its objective of providing uniformly sampled trial sequences for realistic experimental designs. This failure is due primarily to the inability of current SAT sampling tools to cope with massive solution spaces. While SAT solvers are still useful for generating non-uniform solutions to SweetPea design's, we have not yet been able to achieve the uniformity guarantees with the current SAT encoding.
+
+This paper has presented the background information and benchmarks demonstrating these problems, and has introduced a complexity gradation for discussing experimental designs of varying complexity. It also introduced methods for enumerating arbitrary solutions to designs that can be classified below level 4. This allows efficient generation of samples which are guaranteed to be uniformly distributed for these classes of designs. Rejection sampling is used to ensure that no generated sequences that violate design constraints are returned to the user.
+
+While not yet able to solve the problem for all experimental designs, this approach is extremely beneficial for simple designs. It also provides a framework and pattern upon which to build for more complicated designs. We expect that these methods can be extended to generate uniformly distributed samples for all experimental designs in efficient time and space.
+
+
+

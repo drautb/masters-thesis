@@ -34,7 +34,6 @@ When constructing a set $S$ by combining individual elements from mulitple other
 This is known as the \textit{Multiplication Principle} \cite{brualdi_introductory_2010}.
 
 
-
 \section{Partition of an Experimental Design}
 
 An experimental design is composed of three elements: a set of factors, a subset of the factors to be combined with each other (crossed), and a set of constraints. The set of crossed factors fundamentally shape the generated trial sequences. The length of a trial sequence is governed by the number of combinations of level values for each crossed factor. For example, consider a design in which there are two crossed factors, each with three levels. By the multiplication principle, there are $3 * 3 = 9$ unique combinations of level values from each factor, hence trial sequences in this design will be nine trials long.
@@ -45,9 +44,14 @@ Lastly, we further divide $\overline{C}_B$ into two more sets. Although basic fa
 
 We could also define $C_{B_S}$ and $C_{B_I}$, however there will be no benefit to doing so, as the relationship between factors in $C_B$ and dependent derived factors is inverted. Each combination of levels in the crossed set governs the values for $C_B$, which will then in turn govern dependent derived factors.
 
-The partition of $D$ with which we are concerned is therefore: $\{C_B, C_D, \overline{C}_{B_S}, \overline{C}_{B_I}, \overline{C}_D\}$, as shown in figure.... TODO.
+The partition of $D$ with which we are concerned is therefore: $\{C_B, C_D, \overline{C}_{B_S}, \overline{C}_{B_I}, \overline{C}_D\}$, as shown in figure \ref{fig:partition}.
 
-% TODO: Figure for set breakdown
+\begin{figure}
+\centering
+\centerline{\includegraphics[origin=c,width=12cm]{../figures/partition.jpg}}
+\caption{Partition of an Experimental Design}
+\label{fig:partition}
+\end{figure}
 
 Lastly, we define $X$ to be a set of ordered pairs $t_1, t_2, \cdot\cdot\cdot t_n$, representing the crossing of factors in $C$. Each ordered pair $t$ contains items $i_1, i_2, \cdot\cdot\cdot i_j$, where item $i_j$ is one of the levels from the $j_{th}$ factor in $C$. Each ordered pair $t$ must be unique, and there is an ordered pair for every possible combination of levels from factors in $C$. By the multiplication principle, there will be $n = C_1 \cdot C_2 c\dot\cdot\cdot C_{|C|}$ such ordered pairs, and there are $P(n, n) = n!$ permutations of this set. We will also use $l$ to refer to the trial sequence length, which is equivalent to $|X|$.
 
@@ -66,7 +70,7 @@ With level 3 designs come derived factors. It is now possible that all sets in t
 
 Derived factors allow the user to provide an arbitrary predicate for each level in the factor. We have not solved the halting problem, so we will need to apply these predicates to different argument combinations in order to determine which inputs are acceptable for each trial. We define $X_S$ to be the set of ordered pairs representing the crossing of factors in $\overline{C}_{B_S}$, also referred to as the \textit{source crossing}. The next task is to determine, for every element in $X$, which elements of $X_S$ are compatible using the user-defined predicates.
 
-For every ordered pair $t \in X$, there is some number of items in $t$ corresponding to derived factor levels, labeled $d_1, d_2, \cdot\cdot\cdot d_{|C_D|}$ comprising the set $V_t$. Each $d \in V$ is associated with a predicate, $pred(d)$. For every $t \in X$, every $b \in X_S$ is consulted to see if the predicates for all $d \in V_t$ are satisfied. If any one of them is not satisfied, then $b$ is not a compatible choice for $t$, and must be discarded from consideration for $t$. Once this process is complete, we are left with a list of subsets of $X_S$, in which the $n^{th}$ subset indicates which elements of $X_S$ are compatible with the $n^{th}$ crossing in $X$.
+For every ordered pair $t \in X$, there is some number of items in $t$ corresponding to derived factor levels, labeled $d_1, d_2, \cdot\cdot\cdot d_{|C_D|}$ comprising the set $V_t$. Each $d \in V$ is associated with a predicate\footnote{These predicates, also called derivation functions, are expected to be deterministic. If they are non-deterministic, then inconsistent solutions may be produced as the predicates may be applied more than once to the same arguments. This could also be handled by ensuring that each predicate is only applied once to each argument combination and the results are saved.}, $pred(d)$. For every $t \in X$, every $b \in X_S$ is consulted to see if the predicates for all $d \in V_t$ are satisfied. If any one of them is not satisfied, then $b$ is not a compatible choice for $t$, and must be discarded from consideration for $t$. Once this process is complete, we are left with a list of subsets of $X_S$, in which the $n^{th}$ subset indicates which elements of $X_S$ are compatible with the $n^{th}$ crossing in $X$.
 
 More formally, let $S$ be a list of items $J_1, J_2, \cdot\cdot\cdot J_{|X|}$. The following statements are true:
 
@@ -84,4 +88,8 @@ s = l! \cdot \prod_{i=1}^{|\overline{C}_{B_I}|} |f_i|^l \cdot \prod_{k=1}^{|S|} 
 The total number of solutions $s$ for an experimental design, is the product of the number of permutations of the crossed factors, the number of combinations of each independent factor, and the number of acceptable combinations of all source factors.
 
 
-% TODO: Acknowledge that derivation predicates may not be deterministic, though they are expected to be, generally. If they are not, what happens?
+\section{Example}
+
+TODO
+
+% TODO: Correctness proof? MEntion that counts have been tested with SAT model counters?

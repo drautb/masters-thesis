@@ -1,7 +1,6 @@
 \contentsline {chapter}{\uppercase {Abstract}}{iii}
 \contentsline {chapter}{LIST OF FIGURES}{vii}
 \contentsline {chapter}{LIST OF TABLES}{viii}
-\contentsline {chapter}{\uppercase {Notation and Symbols}}{ix}
 \unhbox \voidb@x \\[-1.2ex] \kern -1.5em\contentsline {}{\textbf {CHAPTERS}}{}
 \contentsline {chapter}{\numberline {1.}\hyphenpenalty =10000\exhyphenpenalty =10000\relax \linepenalty =0 \uppercase {Motivation}\global \uuthesis@needtocspacetrue }{1}
 \ifuuthesis@needtocspace \vspace {\uuthesis@chaptersectionspace } \fi \global \uuthesis@needtocspacefalse 
@@ -51,4 +50,22 @@
 \contentsline {section}{\numberline {4.1}Principles of Counting}{20}
 \contentsline {section}{\numberline {4.2}Partition of an Experimental Design}{21}
 \contentsline {section}{\numberline {4.3}Formula}{22}
-\contentsline {chapter}{REFERENCES}{24}
+\contentsline {section}{\numberline {4.4}Example}{23}
+\contentsline {chapter}{\numberline {5.}\hyphenpenalty =10000\exhyphenpenalty =10000\relax \linepenalty =0 \uppercase {Sequence Construction}\global \uuthesis@needtocspacetrue }{25}
+\ifuuthesis@needtocspace \vspace {\uuthesis@chaptersectionspace } \fi \global \uuthesis@needtocspacefalse 
+\contentsline {section}{\numberline {5.1}Enumerating Permutations and Combinations}{25}
+\ifuuthesis@needtocspace \vspace {\uuthesis@chaptersectionspace } \fi \global \uuthesis@needtocspacefalse 
+\contentsline {subsection}{\numberline {5.1.1}Interval Mapping}{25}
+\ifuuthesis@needtocspace \vspace {\uuthesis@chaptersectionspace } \fi \global \uuthesis@needtocspacefalse 
+\contentsline {subsection}{\numberline {5.1.2}Permutations}{26}
+\ifuuthesis@needtocspace \vspace {\uuthesis@chaptersectionspace } \fi \global \uuthesis@needtocspacefalse 
+\contentsline {subsection}{\numberline {5.1.3}Combinations}{26}
+\contentsline {section}{\numberline {5.2}Construction Algorithm}{28}
+\contentsline {subsection}{\numberline {5.2.1}Interval Mapping for an Experimental Design}{28}
+\contentsline {subsection}{\numberline {5.2.2}Mapping Selected Values to Levels}{29}
+\contentsline {section}{\numberline {5.3}Example}{30}
+\contentsline {section}{\numberline {5.4}Handling Constraints}{30}
+\contentsline {section}{\numberline {5.5}Benchmarks}{31}
+\contentsline {chapter}{\numberline {6.}\hyphenpenalty =10000\exhyphenpenalty =10000\relax \linepenalty =0 \uppercase {Future Work}\global \uuthesis@needtocspacetrue }{33}
+\contentsline {chapter}{\numberline {7.}\hyphenpenalty =10000\exhyphenpenalty =10000\relax \linepenalty =0 \uppercase {Conclusion}\global \uuthesis@needtocspacetrue }{35}
+\contentsline {chapter}{REFERENCES}{36}
