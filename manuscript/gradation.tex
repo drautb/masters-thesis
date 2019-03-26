@@ -2,7 +2,7 @@
 
 \chapter{A Complexity Spectrum for SweetPea designs}
 
-The complexity of SweetPea designs greatly varies depending on the user's requirements. At one end of the spectrum are simple designs, in which there are no structured relationships between trials in a sequence. At the other end are the most complex designs, in which multiple structured relationships exist between multiple trials in a sequence in varying intervals. This chapter will present a precised gradation of 6 complexity levels for experimental designs in order to facilitate future discussion. Recall that a complete experimental design is defined by a block, composed of a set of factors, a crossing of some subset of the factors, and a set of constraints. This section considers the complexity of a design based solely upon the factors present. Constraints on the overall design are not included in this gradation, as their complexity depends primarily on the complexity of the factors that they constrain.
+The complexity of SweetPea designs greatly varies depending on the user's requirements. At one end of the spectrum are simple designs, in which there are no structured relationships between trials in a sequence. At the other end are the most complex designs, in which multiple structured relationships exist between multiple trials in a sequence at varying intervals. This chapter will present a precised gradation of 6 complexity tiers for experimental designs in order to facilitate future discussion. Recall that a complete experimental design is defined by a block, which is composed of a set of factors, a crossing of some subset of the factors, and a set of constraints. This section considers the complexity of a design based solely upon the factors present. Constraints on the overall design are not included in this gradation, as their complexity depends primarily on the complexity of the factors that they constrain.
 
 
 \section{Factors and Windows}
@@ -57,24 +57,24 @@ Notice that windows with non-one width and stride will not have a value for ever
 
 \section{Complexity Gradation}
 
-Now understanding the types of factors and windows that can be used to define experimental designs, we can establish the complexity levels with which to categorize different designs.
+Now understanding the types of factors and windows that can be used to define experimental designs, we can establish the complexity tiers with which to categorize different designs.
 
-\subsection{Level 1}
+\subsection{Tier 1}
 
-Level 1 designs consist of basic factors only. No derived factors are allowed, and all factors in the design are crossed. Every valid trial sequence is a permutation of the crossed factors.
+Tier 1 designs consist of basic factors only. No derived factors are allowed, and all factors in the design are crossed. Every valid trial sequence is a permutation of the crossed factors.
 
 \begin{verbatim}
 direction = Factor("Direction", ["North", "South", "East", "West"])
 time_of_day = Factor("Time of Day", ["Sunrise", "High Noon", "Sunset"])
 \end{verbatim}
 
-\subsection{Level 2}
+\subsection{Tier 2}
 
-Level 2 designs still consist of only basic factors, but allow additional basic factors to be present which are uncrossed. Every valid trial sequence is a permutation of the crossed factors and random level selections for the uncrossed factors.
+Tier 2 designs still consist of only basic factors, but allow additional basic factors to be present which are uncrossed. Every valid trial sequence is a permutation of the crossed factors and random level selections for the uncrossed factors.
 
-\subsection{Level 3}
+\subsection{Tier 3}
 
-Level 3 designs add derived factors with windows being limited to $width=1$ and $stride=1$. (\texttt{WithinTrial}) Every valid trial sequence is a permutation of the crossed factors and random level selections for the uncrossed basic factors. The values for uncrossed derived factors will depend upon the level selections of basic factors.
+Tier 3 designs add derived factors with windows being limited to $width=1$ and $stride=1$. (\texttt{WithinTrial}) Every valid trial sequence is a permutation of the crossed factors and random level selections for the uncrossed basic factors. The values for uncrossed derived factors will depend upon the level selections of basic factors.
 
 \begin{verbatim}
 congruency = Factor("Congruency", [
@@ -83,9 +83,9 @@ congruency = Factor("Congruency", [
 ])
 \end{verbatim}
 
-\subsection{Level 4}
+\subsection{Tier 4}
 
-Level 4 designs relax the window limits to $width=2$ and $stride=1$. (\texttt{Transition})
+Tier 4 designs relax the window limits to $width=2$ and $stride=1$. (\texttt{Transition})
 
 \begin{verbatim}
 color_repeats = Factor("Color Repeats", [
@@ -95,9 +95,9 @@ color_repeats = Factor("Color Repeats", [
 \end{verbatim}
 
 
-\subsection{Level 5}
+\subsection{Tier 5}
 
-Level 5 designs allow arbitrary values for the width and stride of windows.
+Tier 5 designs allow arbitrary values for the width and stride of all windows.
 
 \begin{verbatim}
 unconnected_color_repeats = Factor("Color Repeats (Unconnected)", [

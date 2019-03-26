@@ -6,7 +6,7 @@ Currently, SweetPea offloads the entire sampling process to an external tool. Wh
 
 Experimental designs in SweetPea can be viewed as combinatorics problems, each with a countable set of solutions. If we could construct a formula for counting the solutions to an experimental design, we may be able to also discover a bijection between solutions to the design and the natural numbers. This would reduce the burden of guaranteeing uniformity to randomly sampling natural numbers from the uniform distribution.
 
-As a first foray into solution counting for SweetPea designs, this section only considers level 1, 2, and 3 designs. We also leave the set of design constraints for later consideration.
+As a first foray into solution counting for SweetPea designs, this section only considers tier 1, 2, and 3 designs. We also leave the set of design constraints for later consideration.
 
 
 \section{Principles of Counting}
@@ -58,15 +58,15 @@ Lastly, we define $X$ to be a set of ordered pairs $t_1, t_2, \cdot\cdot\cdot t_
 
 \section{Formula}
 
-With the partition established, we are now able to develop the formula for counting the number of solutions, $s$, for an experimental design. For the simplest of designs (level 1), the ordered pairs in $X$ fully represent all possible trials. $C_B \neq \emptyset$, while every other set in the partition is empty. Every permutaion of $X$ represents a unique trial sequence, therefore there are $s = l!$ solutions to a level 1 design.
+With the partition established, we are now able to develop the formula for counting the number of solutions, $s$, for an experimental design. For the simplest of designs (tier 1), the ordered pairs in $X$ fully represent all possible trials. $C_B \neq \emptyset$, while every other set in the partition is empty. Every permutaion of $X$ represents a unique trial sequence, therefore there are $s = l!$ solutions to a tier 1 design.
 
-Level 2 designs introduce basic factors that are not in $C$, and are thus less constrained. In otherwords, starting with level 2, $\overline{C}_{B_I} \neq \emptyset$. For a factor $f$, let $|f|$ denote the number of levels that $f$ has. For each $f \in \overline{C}_{B_I}$, $f$ is fully independent; therefore, any of the $|f|$ levels may be selected for each trial. In a sequence of $l$ trials, we can again apply the multiplication principle to determine that there are $|f|^l$ possible combinations of the levels of $f$. If $|\overline{C}_{B_I}| > 1$, then we apply the multiplication principle repeatedly to determine the total number of combinations for all factors in $\overline{C}_{B_I}$. Applying the multiplication principle one more time, we see that the total number of solutions for a level 2 design is:
+Tier 2 designs introduce basic factors that are not in $C$, and are thus less constrained. In otherwords, starting with tier 2, $\overline{C}_{B_I} \neq \emptyset$. For a factor $f$, let $|f|$ denote the number of levels that $f$ has. For each $f \in \overline{C}_{B_I}$, $f$ is fully independent; therefore, any of the $|f|$ levels may be selected for each trial. In a sequence of $l$ trials, we can again apply the multiplication principle to determine that there are $|f|^l$ possible combinations of the levels of $f$. If $|\overline{C}_{B_I}| > 1$, then we apply the multiplication principle repeatedly to determine the total number of combinations for all factors in $\overline{C}_{B_I}$. Applying the multiplication principle one more time, we see that the total number of solutions for a tier 2 design is:
 
 \[
 s = l! \cdot \prod_{i=1}^{|\overline{C}_{B_I}|} |f_i|^l
 \]
 
-With level 3 designs come derived factors. It is now possible that all sets in the partition are non-empty. The only sets in the partition that we have yet to consider are $C_D$, $\overline{C}_{B_S}$, and $\overline{C}_D$. The presence of factors in $C_D$ does not alter the formula, as level selection for factors in $C_D$ is still controlled by $X$ (the crossing). $\overline{C}_D$ also requires no special treatment as the level selection for its factors depends entirely on the levels selected for basic factors. (Whether in $C_B$, $\overline{C}_{B_S}$, or $\overline{C}_{B_I}$.) This leaves only $\overline{C}_{B_S}$, which will be our next focus.
+With tier 3 designs come derived factors. It is now possible that all sets in the partition are non-empty. The only sets in the partition that we have yet to consider are $C_D$, $\overline{C}_{B_S}$, and $\overline{C}_D$. The presence of factors in $C_D$ does not alter the formula, as level selection for factors in $C_D$ is still controlled by $X$ (the crossing). $\overline{C}_D$ also requires no special treatment as the level selection for its factors depends entirely on the levels selected for basic factors. (Whether in $C_B$, $\overline{C}_{B_S}$, or $\overline{C}_{B_I}$.) This leaves only $\overline{C}_{B_S}$, which will be our next focus.
 
 Derived factors allow the user to provide an arbitrary predicate for each level in the factor. We have not solved the halting problem, so we will need to apply these predicates to different argument combinations in order to determine which inputs are acceptable for each trial. We define $X_S$ to be the set of ordered pairs representing the crossing of factors in $\overline{C}_{B_S}$, also referred to as the \textit{source crossing}. The next task is to determine, for every element in $X$, which elements of $X_S$ are compatible using the user-defined predicates.
 
@@ -79,7 +79,7 @@ More formally, let $S$ be a list of items $J_1, J_2, \cdot\cdot\cdot J_{|X|}$. T
 \item $\forall t \in X,  \forall d \in V_t \mid pred(d) \implies \top$
 \end{enumerate}
 
-Once we have generated $S$, we can apply the multiplication principle one more time to complete the formula for level 1, 2, and 3 designs:
+Once we have generated $S$, we can apply the multiplication principle one more time to complete the formula for tier 1, 2, and 3 designs:
 
 \[
 s = l! \cdot \prod_{i=1}^{|\overline{C}_{B_I}|} |f_i|^l \cdot \prod_{k=1}^{|S|} |J_k|

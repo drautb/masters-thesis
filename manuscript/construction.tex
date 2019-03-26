@@ -2,7 +2,7 @@
 
 \chapter{Sequence Construction}
 
-With an exact count of viable sequences for level 1, 2, and 3 designs, a mapping from natural numbers to valid trial sequences is now a possibility. Such a mapping would prove valuable for preserving uniformity guarantees, as well as generating solutions more efficiently. This chapter presents an algorithm that guarantees uniformly sampled solutions to level 1, 2, and 3 designs by randomly sampling natural numbers from the uniform distribution in the range of $[0, s)$. Each sampled number is then used to generate the unique trial sequence associated with that number.
+With an exact count of viable sequences for tier 1, 2, and 3 designs, a mapping from natural numbers to valid trial sequences is now a possibility. Such a mapping would prove valuable for preserving uniformity guarantees, as well as generating solutions more efficiently. This chapter presents an algorithm that guarantees uniformly sampled solutions to tier 1, 2, and 3 designs by randomly sampling natural numbers from the uniform distribution in the range of $[0, s)$. Each sampled number is then used to generate the unique trial sequence associated with that number.
 
 
 \section{Enumerating Permutations and Combinations}
@@ -64,7 +64,7 @@ Accomplishing step 1 was the subject of chapter 4. We will not revisit that here
 
 \subsection{Interval Mapping for an Experimental Design}
 
-For level 1, 2, and 3 designs, as we saw in chapter 4, there is a partition of every design containing 5 sets: $\{C_B, C_D, \overline{C}_{B_S}, \overline{C}_{B_I}, \overline{C}_D\}$. In this section we will identify the upper bound of each interval to be used for interval mapping that cover all factors in the partition. We will use $U$ to denote the set of these upper bounds. (The lower bounds are uninteresting, as they are always $0$.
+For tier 1, 2, and 3 designs, as we saw in chapter 4, there is a partition of every design containing 5 sets: $\{C_B, C_D, \overline{C}_{B_S}, \overline{C}_{B_I}, \overline{C}_D\}$. In this section we will identify the upper bound of each interval to be used for interval mapping that cover all factors in the partition. We will use $U$ to denote the set of these upper bounds. (The lower bounds are uninteresting, as they are always $0$.
 
 We first consider $C_B$ and $C_D$. Recall that together, these sets contain all factors that are crossed with each other to form the crossing, labeled $X$ in chapter 4. Recall also that $|X|$ governs the length of a generated trial sequence: $l = |X|$, and that there are $l!$ permtutations of the ordered pairs in $X$. Therefore, the first interval, which will determine which permutation of $X$ to use, is $l!$. At this point, $U = \{l!\}$.
 
@@ -111,7 +111,7 @@ In the future, the counting and construction algorithms could be enhanced to acc
 
 % TODO: Repeat benchmarks from chapter 2 that apply here.
 
-Of the ten benchmarks designs that were introduced in chapter 2, 4 can be classified as level 1, 2, or 3 designs: \texttt{stroop-2}, \texttt{stroop-3}, \texttt{stroop-4}, \texttt{stroop-5}. We will repeat the benchmarks for those designs here using this construction approach to sampling. We will also introduce a few additional designs involving variations on the Stroop design to demonstrate the scalability of this approach, and the empirical performance of the rejection sampling phase. Table \ref{tab:benchmark_experiments} reviews the basic experiment data for each benchmark design. Table \ref{tab:sampling_metrics} summarizes the time required to generate 10,000 samples for each design, as well as the average number of rejections per sample. (Rejctions caused by constructing a trial sequence that violated external constraints.)
+Of the ten benchmarks designs that were introduced in chapter 2, 4 can be classified as tier 1, 2, or 3 designs: \texttt{stroop-2}, \texttt{stroop-3}, \texttt{stroop-4}, \texttt{stroop-5}. We will repeat the benchmarks for those designs here using this construction approach to sampling. We will also introduce a few additional designs involving variations on the Stroop design to demonstrate the scalability of this approach, and the empirical performance of the rejection sampling phase. Table \ref{tab:benchmark_experiments} reviews the basic experiment data for each benchmark design. Table \ref{tab:sampling_metrics} summarizes the time required to generate 10,000 samples for each design, as well as the average number of rejections per sample. (Rejctions caused by constructing a trial sequence that violated external constraints.)
 
 \begin{table}
   \centering
