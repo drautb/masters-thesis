@@ -125,13 +125,13 @@ STYFILES	= amssymb.sty			\
 
 TEXFILES        = abstract.tex			\
 		  acknowledge.tex		\
-		  chap1.tex			\
-		  chap2.tex			\
-		  chap3.tex			\
-		  chap4.tex			\
-		  # appa.tex			\
-		  # appb.tex			\
-		  # appc.tex			\
+		  motivation.tex			\
+		  benchmarks.tex			\
+		  gradation.tex			\
+		  counting.tex			\
+		  construction.tex			\
+		  future.tex			\
+		  conclusion.tex			\
 		  notation.tex
 
 THESIS		= thesis
