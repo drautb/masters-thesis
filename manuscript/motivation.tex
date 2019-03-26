@@ -75,8 +75,20 @@ The current encoding scheme will allocate 72 variables to represent each level o
 
 For example, if variable 68 is true, that corresponds to the level \texttt{red} being selected for the factor \texttt{text} in trial number 9. The encoding will also require variables 69 and 70 to be false in this case, as well as require variable 71 to be equivalent to 65. Once a solution is found, it is then decoded back into the original language of the design as a trial sequence. For more details concerning SweetPea's syntax or the current encoding scheme, the reader is referred to the original paper.
 
+\subsection{1-to-1 Correspondence}
+
+TODO: Why do we believe that there is a 1-to-1 correspondence between SAT solutions and valid trial sequences?
+
 
 \section{Problems}
+
+% TODO:
+% End of 1.3 - I'm not clear where the problem is with samplers. They are
+% surely intended to sample from large solution sets; my impression was
+% that it had something more specifically to do with determining the size
+% of the solution space, as opposed to sampling from a space of know
+% size. I may be confused, but if not, then that seems like an important
+% clarification.
 
 SweetPea sounds panacean, but it has yet to fully realize its objectives. It relies \textit{fully} on a SAT-sampler to approximately uniformly sample some number of solutions to the generated formula. In practice, this works wonderfully for \textit{small} experimental designs, where \textit{small} means designs in which the trial sequence length is less than ten. However, realistic experimental designs are significantly larger, often with trial sequence lengths in the tens or hundreds.
 

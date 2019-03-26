@@ -2,62 +2,36 @@
 
 \chapter{Current Benchmarks}
 
-This chapter introduces several experiment designs and provides benchmarks for their performance as measured using the current approach to samping. These results should convince the reader of the need for an alternative approach to the problem, as the current method cannot cope with the scale of the solution spaces in question.
-
-
-\section{Tool Overview}
-
-Multiple tools are being used or have been considered for different aspects of SweetPea with varying degrees of success. This section introduces each tool explaining briefly how it works and how it is being used in the current implementation.
-
-\subsection{CryptoMiniSat}
-
-CryptoMiniSat \cite{DBLP:conf/sat/SoosNC09,DBLP:conf/sat/2009} is the main SAT solver that SweePea relies on for generating non-uniformly sampled trial sequences. SweetPea achieves this with CryptoMiniSat by using the naive approach of solving for any solution, and then constraining the original formula to disallow that particular solution from being produced a second time. Due to the difficulty encountered while attempting to use SAT samplers, it has proven quite valuable to provide researchers with this ability to quickly generate some number of trial sequences conforming to their design, even though they may not be uniformly distributed. CryptoMiniSat is also used internally by Unigen. Lastly, in addition to logical \texttt{AND}, \texttt{OR}, and \texttt{NOT} clauses, CryptoMiniSat also supports \texttt{XOR} claues, although SweetPea has not yet put these to use. This is an opportunity for improvement.
-
-\subsection{Unigen}
-
-Unigen \cite{chakraborty2013scalable} is a recently developed SAT \textit{sampler}. Given a boolean formula in conjunctive normal form (CNF), Unigen can produce nearly uniformly sampled satisfying assignments. SweetPea relies directly on Unigen for uniformly sampling trial sequnces for a given design. The SweetPea encoding is designed such that there is a one-to-one relationship between solutions to the formula, and unique trial sequences that conform to the design. Unigen is based on a hashing technique that partitions the solution space and then samples solutions from each partition. Unigen has worked well for some designs, but its capacities are quickly overwhelmed by even modest designs.
-
-\subsection{KUS}
-
-KUS \cite{SGRM18} is another SAT sampling tool developed by some of the same team behind Unigen. However, it approaches the problem quite differently. KUS requires a compiled deterministic decomposable negation normal form (d-DNNF) of a formula in conjunctive normal form. There are known polynomial time techniques for many operations on the d-DNNF representation of a boolean formula, including model counting. KUS takes advantage of these techniques to uniformly sample solutions using this form. This technique offloads much of the complexity to to the d-DNNF compiler, rather than the sampling phase. KUS, while able to sample quickly, is not used in SweetPea due to scaling problems in compiling the formula to d-DNNF. Though the number of variables and clauses in the CNF for a formula is typically modest, compiling the equivalent d-DNNF has proven intractable.
-
-% TODO: Say more about the d-DNNF?
-
-\subsection{Spur}
-
-Spur \cite{spur} is a more recent SAT sampler that is based on reservoir sampling. In benchmarks, it performs better than Unigen in nearly all cases. However, it does require an exact model count (based on sharpSAT), while an approximation suffices for Unigen. SweetPea does not rely on Spur at present, as it was developed after SweetPea's inception. However it has been considered as it represents the latest research for SAT sampling.
-
-%% TODO: Do we really need this?
-%\subsection{ApproxMC}
-%
-%ApproxMC \cite{DBLP:journals/corr/ChakrabortyMV13} is an approximate model counter for SAT formulae. Unigen relies on
+This chapter introduces several experiment designs and provides benchmarks for their performance as measured using the current approach to samping. These results should be convincing of  the need for an alternative approach to the problem, as the current method cannot cope with the scale of the solution spaces in question.
 
 
 \section{Experiments}
 
-Each of these tools was used to solve or sample solutions to formulae reprsenting several experimental designs of increasing complexity comparable to realistic experiments written by current researchers. Table \ref{tab:benchmark_experiments} enumerates the characteristics of each design, including properties of its CNF encoding and number of solutions.
+Multiple tools will be applied to solve or sample solutions to formulae reprsenting several experimental designs of increasing complexity comparable to realistic experiments written by current researchers. Table \ref{tab:benchmark_experiments} enumerates the characteristics of each design, including its complexity tier (as defined in chapter 2), properties of its CNF encoding, and a solution count.
 
-% Stroop tests are with n colors, and a no more than 1 con in a row constraint
+For \texttt{stroop-2} and \texttt{stroop-3}, the solution count is precise, as computed by a SAT model counter. For all other experiments, the solution count is approximated as the factorial of the sequence length, as model counters were unable to provide a count in reasonable amount of time. These approximate solution counts ignore both constraints, which would reduce the solution count, and independent factors, which would increase the solution count. In practice, independent factors contribute more solutions than constraints remove.
 
+% NOTE: Stroop tests are with n colors, and a no more than 1 con in a row constraint
 \begin{table}
   \centering
   \caption{Benchmark Experiments}
 \begin{tabular}{|c|c|c|c|c|}
 \hline
-\multicolumn{1}{|l|}{Experiment Name} & Sequence Length & Variables  & Clauses    & Total Solutions    \\ \hline
-stroop-2                              & 4               & 392        & 1,559      & 12                 \\ \hline
-stroop-3                              & 9               & 1,965      & 8,531      & 151,200            \\ \hline
-stroop-4                              & 16              & 3,848      & 16,451     & $\approx 2^{44}$   \\ \hline
-stroop-5                              & 25              & 10,326     & 45,991     & $\approx 2^{83}$   \\ \hline
-stroop-congruency-balanced            & 17              & 5,570      & 24,215     & $\approx 2^{115}$  \\ \hline
-stroop-response                       & 33              & 16,242     & 72,679     & $\approx 2^{220}$  \\ \hline
-padmala-pessoa                        & 37              & 116,289    & 559,080    & $\approx 2^{201}$  \\ \hline
-task-switching                        & 32              & 14,246     & 62,700     & $\approx 2^{275}$  \\ \hline
-task-switching-2                      & 146             & 742,832    & 3,672,632  & $\approx 2^{990}$  \\ \hline
-task-switching-cue-switching          & 1,025           & -          & -          & $\approx 2^{8778}$ \\ \hline
+\multicolumn{1}{|l|}{Experiment Name} & Tier  & Sequence Length & Variables  & Clauses    & Total Solutions    \\ \hline
+stroop-2                              & 3     & 4               & 392        & 1,559      & 12                 \\ \hline
+stroop-3                              & 3     & 9               & 1,965      & 8,531      & 151,200            \\ \hline
+stroop-4                              & 3     & 16              & 3,848      & 16,451     & $\approx 2^{44}$   \\ \hline
+stroop-5                              & 3     & 25              & 10,326     & 45,991     & $\approx 2^{83}$   \\ \hline
+stroop-congruency-balanced            & 4     & 17              & 5,570      & 24,215     & $\approx 2^{48}$   \\ \hline
+stroop-response                       & 4     & 33              & 16,242     & 72,679     & $\approx 2^{122}$  \\ \hline
+padmala-pessoa                        & 4     & 37              & 116,289    & 559,080    & $\approx 2^{143}$  \\ \hline
+task-switching                        & 4     & 32              & 14,246     & 62,700     & $\approx 2^{117}$  \\ \hline
+task-switching-2                      & 5     & 146             & 742,832    & 3,672,632  & $\approx 2^{844}$  \\ \hline
+task-switching-cue-switching          & 4     & 1,025           & -          & -          & $\approx 2^{8778}$ \\ \hline
 \end{tabular}
 \label{tab:benchmark_experiments}%
 \end{table}
+
 
 
 \section{Benchmarks}
@@ -68,7 +42,11 @@ Unless otherwise noted, all sampling benchmarks were configured to generate 10 s
 
 \end{verbatim}
 
+
 \subsection{CryptoMiniSat}
+
+CryptoMiniSat \cite{DBLP:conf/sat/SoosNC09,DBLP:conf/sat/2009} is the main SAT solver that SweePea relies on for generating non-uniformly sampled trial sequences. SweetPea achieves this with CryptoMiniSat by using the naive approach of solving for any solution, and then constraining the original formula to disallow that particular solution from being produced a second time. Due to the difficulty encountered while attempting to use SAT samplers, it has proven quite valuable to provide researchers with this ability to quickly generate some number of trial sequences conforming to their design, even though they may not be uniformly distributed. CryptoMiniSat is also used internally by Unigen. Lastly, in addition to logical \texttt{AND}, \texttt{OR}, and \texttt{NOT} clauses, CryptoMiniSat also supports \texttt{XOR} claues, although SweetPea has not yet put these to use. This is an opportunity for improvement.
+
 
 Table \ref{tab:benchmark_experiments_cmsat} denotes the the time required for CryptoMiniSat to compute a single solution to the SAT formula for each experiment.
 
@@ -96,6 +74,13 @@ task-switching-cue-switching          & -               \\ \hline
 
 
 \subsection{Unigen}
+
+%% TODO: Do we really need this?
+%\subsection{ApproxMC}
+%
+%ApproxMC \cite{DBLP:journals/corr/ChakrabortyMV13} is an approximate model counter for SAT formulae. Unigen relies on
+
+Unigen \cite{chakraborty2013scalable} is a recently developed SAT \textit{sampler}. Given a boolean formula in conjunctive normal form (CNF), Unigen can produce nearly uniformly sampled satisfying assignments. SweetPea relies directly on Unigen for uniformly sampling trial sequnces for a given design. The SweetPea encoding is designed such that there is a one-to-one relationship between solutions to the formula, and unique trial sequences that conform to the design. Unigen is based on a hashing technique that partitions the solution space and then samples solutions from each partition. Unigen has worked well for some designs, but its capacities are quickly overwhelmed by even modest designs.
 
 Table \ref{tab:benchmark_experiments_unigen} denotes the time required for Unigen to generate 10 samples for each experiment.
 
@@ -126,6 +111,10 @@ task-switching-cue-switching          & -               \\ \hline
 
 
 \subsection{KUS}
+
+KUS \cite{SGRM18} is another SAT sampling tool developed by some of the same team behind Unigen. However, it approaches the problem quite differently. KUS requires a compiled deterministic decomposable negation normal form (d-DNNF) of a formula in conjunctive normal form. There are known polynomial time techniques for many operations on the d-DNNF representation of a boolean formula, including model counting. KUS takes advantage of these techniques to uniformly sample solutions using this form. This technique offloads much of the complexity to to the d-DNNF compiler, rather than the sampling phase. KUS, while able to sample quickly, is not used in SweetPea due to scaling problems in compiling the formula to d-DNNF. Though the number of variables and clauses in the CNF for a formula is typically modest, compiling the equivalent d-DNNF has proven intractable.
+
+% TODO: Say more about the d-DNNF?
 
 Table \ref{tab:benchmark_experiments_d4} denotes the time required to compile the CNF for each experiment to d-DNNF using the \texttt{d4} compiler, as well as the resulting d-DNNF file size compared to the original CNF file.
 
@@ -197,7 +186,11 @@ task-switching-cue-switching          & -           \\ \hline
 \end{table}
 
 
+
+
 \subsection{Spur}
+
+Spur \cite{spur} is a more recent SAT sampler that is based on reservoir sampling. In benchmarks, it performs better than Unigen in nearly all cases. However, it does require an exact model count (based on sharpSAT), while an approximation suffices for Unigen. SweetPea does not rely on Spur at present, as it was developed after SweetPea's inception. However it has been considered as it represents the latest research for SAT sampling.
 
 Table \ref{tab:benchmark_experiments_spur} denotes the time required to generate samples for each experiment using Spur.
 

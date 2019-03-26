@@ -102,6 +102,9 @@ TODO
 
 \section{Handling Constraints}
 
+% TODO: Chapter 5.4: are the constraints complex enough that a SAT solver is
+% needed? I would think that they could be checked directly.
+
 Recall that the complexity gradation did not account for the external constraints that may be applied to a design. Such constraints typically enforce some kind of rule regarding repetition of particular characteristics. For example, in the design for Stroop experiments, it is common to apply a constraint that requires that the generated sequence never contain two or more congruent trials in sequence. Constraints may be applied to the levels of derived factors as well, therefore the use may impose practically any condition upon the generated sequence.
 
 In the future, the counting and construction algorithms could be enhanced to account for these constraints. This will be discussed further in Chapter 7. In the meantime however, basic rejection sampling is applied ensure that no generated sequences that violate constraints are ever returned to the user. All constraints are represented in the original SAT encoding, which allows us to invoke a SAT sampler with added clauses representing the constructed sequence to verify that the constructed sequence is in fact valid. More details will be provided in the benchmarks section.

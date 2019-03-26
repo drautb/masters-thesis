@@ -66,6 +66,15 @@ Tier 2 designs introduce basic factors that are not in $C$, and are thus less co
 s = l! \cdot \prod_{i=1}^{|\overline{C}_{B_I}|} |f_i|^l
 \]
 
+% TODO: Comment on the fact that a user can specify an unsatisfiable crossing, in which the solution count is 0.
+% The solver detects this in practice.
+
+% TODO: End of 4.3: It's not immediately obvious that computing the level-3
+% solution-space size is tractable, but I think SweetPea's implementation
+% relies on being able to do this (i.e., I think it builds up a truth
+% table by trying every combination in the crossing). Some words of
+% clarification or explanation would be helpful.
+
 With tier 3 designs come derived factors. It is now possible that all sets in the partition are non-empty. The only sets in the partition that we have yet to consider are $C_D$, $\overline{C}_{B_S}$, and $\overline{C}_D$. The presence of factors in $C_D$ does not alter the formula, as level selection for factors in $C_D$ is still controlled by $X$ (the crossing). $\overline{C}_D$ also requires no special treatment as the level selection for its factors depends entirely on the levels selected for basic factors. (Whether in $C_B$, $\overline{C}_{B_S}$, or $\overline{C}_{B_I}$.) This leaves only $\overline{C}_{B_S}$, which will be our next focus.
 
 Derived factors allow the user to provide an arbitrary predicate for each level in the factor. We have not solved the halting problem, so we will need to apply these predicates to different argument combinations in order to determine which inputs are acceptable for each trial. We define $X_S$ to be the set of ordered pairs representing the crossing of factors in $\overline{C}_{B_S}$, also referred to as the \textit{source crossing}. The next task is to determine, for every element in $X$, which elements of $X_S$ are compatible using the user-defined predicates.
