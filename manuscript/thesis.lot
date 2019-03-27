@@ -1,8 +1,10 @@
-\contentsline {table}{\numberline {3.1}{\ignorespaces Benchmark Experiments}}{11}
-\contentsline {table}{\numberline {3.2}{\ignorespaces Time to Solve for 1 Solution with CryptoMiniSat}}{12}
-\contentsline {table}{\numberline {3.3}{\ignorespaces Time to Generate 10 Samples with Unigen}}{12}
-\contentsline {table}{\numberline {3.4}{\ignorespaces d-DNNF Compilation for Sampling with KUS}}{13}
-\contentsline {table}{\numberline {3.5}{\ignorespaces Time to Generate 10 Samples with KUS}}{13}
-\contentsline {table}{\numberline {3.6}{\ignorespaces Time to Generate 10 Samples with Spur}}{14}
-\contentsline {table}{\numberline {5.1}{\ignorespaces Benchmark Experiments}}{30}
-\contentsline {table}{\numberline {5.2}{\ignorespaces Sampling Metrics}}{30}
+\contentsline {table}{\numberline {1.1}{\ignorespaces Example of an Encoding Diagram}}{4}
+\contentsline {table}{\numberline {1.2}{\ignorespaces Growth of Solution Space}}{6}
+\contentsline {table}{\numberline {3.1}{\ignorespaces Benchmark Experiments}}{12}
+\contentsline {table}{\numberline {3.2}{\ignorespaces Time to Solve for 1 Solution with CryptoMiniSat}}{13}
+\contentsline {table}{\numberline {3.3}{\ignorespaces Time to Generate 10 Samples with Unigen}}{13}
+\contentsline {table}{\numberline {3.4}{\ignorespaces d-DNNF Compilation for Sampling with KUS}}{14}
+\contentsline {table}{\numberline {3.5}{\ignorespaces Time to Generate 10 Samples with KUS}}{14}
+\contentsline {table}{\numberline {3.6}{\ignorespaces Time to Generate 10 Samples with Spur}}{15}
+\contentsline {table}{\numberline {5.1}{\ignorespaces Benchmark Experiments for Sequence Construction}}{31}
+\contentsline {table}{\numberline {5.2}{\ignorespaces Sampling Metrics}}{31}

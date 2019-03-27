@@ -114,11 +114,11 @@ In the future, the counting and construction algorithms could be enhanced to acc
 
 % TODO: Repeat benchmarks from chapter 2 that apply here.
 
-Of the ten benchmarks designs that were introduced in chapter 2, 4 can be classified as tier 1, 2, or 3 designs: \texttt{stroop-2}, \texttt{stroop-3}, \texttt{stroop-4}, \texttt{stroop-5}. We will repeat the benchmarks for those designs here using this construction approach to sampling. We will also introduce a few additional designs involving variations on the Stroop design to demonstrate the scalability of this approach, and the empirical performance of the rejection sampling phase. Table \ref{tab:benchmark_experiments} reviews the basic experiment data for each benchmark design. Table \ref{tab:sampling_metrics} summarizes the time required to generate 10,000 samples for each design, as well as the average number of rejections per sample. (Rejctions caused by constructing a trial sequence that violated external constraints.)
+Of the ten benchmarks designs that were introduced in chapter 2, 4 can be classified as tier 1, 2, or 3 designs: \texttt{stroop-2}, \texttt{stroop-3}, \texttt{stroop-4}, \texttt{stroop-5}. We will repeat the benchmarks for those designs here using this construction approach to sampling. We will also introduce a few additional designs involving variations on the Stroop design to demonstrate the scalability of this approach, and the empirical performance of the rejection sampling phase. Table \ref{tab:benchmark_experiments_construction} reviews the basic experiment data for each benchmark design. Table \ref{tab:sampling_metrics} summarizes the time required to generate 10,000 samples for each design, as well as the average number of rejections per sample. (Rejctions caused by constructing a trial sequence that violated external constraints.)
 
 \begin{table}[t]
   \centering
-  \caption{Benchmark Experiments}
+  \caption{Benchmark Experiments for Sequence Construction}
 \begin{tabular}{|c|c|c|c|c|}
 \hline
 \multicolumn{1}{|l|}{Experiment Name} & Sequence Length & Total Solutions & Generate Single Solution  \\ \hline
@@ -130,7 +130,7 @@ stroop-10                             &                 &                 &     
 stroop-20                             &                 &                 &                           \\ \hline
 stroop-20-constraints                 &                 &                 &                           \\ \hline
 \end{tabular}
-\label{tab:benchmark_experiments}
+\label{tab:benchmark_experiments_construction}
 \end{table}
 
 \begin{table}[t]
