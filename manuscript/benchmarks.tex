@@ -12,12 +12,12 @@ Multiple tools will be applied to solve or sample solutions to formulae reprsent
 For \texttt{stroop-2} and \texttt{stroop-3}, the solution count is precise, as computed by a SAT model counter. For all other experiments, the solution count is approximated as the factorial of the sequence length, as model counters were unable to provide a count in reasonable amount of time. These approximate solution counts ignore both constraints, which would reduce the solution count, and independent factors, which would increase the solution count. In practice, independent factors contribute more solutions than constraints remove.
 
 % NOTE: Stroop tests are with n colors, and a no more than 1 con in a row constraint
-\begin{table}
+\begin{table}[t]
   \centering
   \caption{Benchmark Experiments}
-\begin{tabular}{|c|c|c|c|c|}
+\begin{tabular}{|c|c|c|c|c|c|}
 \hline
-\multicolumn{1}{|l|}{Experiment Name} & Tier  & Sequence Length & Variables  & Clauses    & Total Solutions    \\ \hline
+\multicolumn{1}{|l|}{Experiment Name} & Tier  & Length          & Variables  & Clauses    & Total Solutions    \\ \hline
 stroop-2                              & 3     & 4               & 392        & 1,559      & 12                 \\ \hline
 stroop-3                              & 3     & 9               & 1,965      & 8,531      & 151,200            \\ \hline
 stroop-4                              & 3     & 16              & 3,848      & 16,451     & $\approx 2^{44}$   \\ \hline
@@ -52,7 +52,7 @@ Table \ref{tab:benchmark_experiments_cmsat} denotes the the time required for Cr
 
 % python -m timeit "__import__('os').system('cryptominisat5 padmala-pessoa.cnf > /dev/null')"
 
-\begin{table}
+\begin{table}[t]
   \centering
   \caption{Time to Solve for 1 Solution with CryptoMiniSat}
 \begin{tabular}{|c|c|c|c|c|}
@@ -89,7 +89,7 @@ Table \ref{tab:benchmark_experiments_unigen} denotes the time required for Unige
 
 % Time to sample with 10 samples
 
-\begin{table}
+\begin{table}[t]
   \centering
   \caption{Time to Generate 10 Samples with Unigen}
 \begin{tabular}{|c|c|c|c|c|}
@@ -139,7 +139,7 @@ Table \ref{tab:benchmark_experiments_d4} denotes the time required to compile th
 % INDETERMINATE
 % timelimit -T 36000 -t 36000 /home/drautb/GitHub/meelgroup/KUS/d4    18709.93s user 7.88s system 99% cpu 5:12:08.05 total
 
-\begin{table}
+\begin{table}[t]
   \centering
   \caption{d-DNNF Compilation for Sampling with KUS}
 \begin{tabular}{|c|c|c|c|c|}
@@ -165,7 +165,7 @@ For the experiments for which a d-DNNF file could be successfully compiled, tabl
 % ➜  benchmark-experiments git:(master) ✗ time timelimit -T 36000 -t 36000 python /home/drautb/GitHub/meelgroup/KUS/KUS.py --dDNNF ~/Desktop/stroop-congruency-balanced.dnnf --samples 10 --outputfile d-DNNFs/stroop-congruency-balanced-kus-10-samples.out
 % timelimit -T 36000 -t 36000 python /home/drautb/GitHub/meelgroup/KUS/KUS.py    11.39s user 11.16s system 5% cpu 7:05.45 total
 
-\begin{table}
+\begin{table}[t]
   \centering
   \caption{Time to Generate 10 Samples with KUS}
 \begin{tabular}{|c|c|c|c|c|}
@@ -214,7 +214,7 @@ Table \ref{tab:benchmark_experiments_spur} denotes the time required to generate
 % timelimit -T 36000 -t 36000 ~/GitHub/ZaydH/spur/build/Release/spur -cnf  -s 1  71.16s user 6.95s system 62% cpu 2:04.49 total
 
 
-\begin{table}
+\begin{table}[t]
   \centering
   \caption{Time to Generate 10 Samples with Spur}
 \begin{tabular}{|c|c|c|c|c|}
@@ -248,7 +248,7 @@ We sampled 10,000 trial sequences for the stroop-3 experiment using Unigen, KUS,
 
 Unigen sampled 10,010 trial sequences, 9,965 of which were unique. Numbering each unique trial sequence in the order that it appeared and generating a histogram gives a visual confirmation that the sequences are approximately uniform. There were 333 sequences that were selected twice, and only 6 that were selected three times. No sequences were selected more than three times.
 
-\begin{figure}
+\begin{figure}[t]
 \centering
 \centerline{\includegraphics[origin=c,width=12cm]{../figures/unigen-samples.pdf}}
 \caption{Distribution of Sequences Sampled by Unigen}
@@ -268,7 +268,7 @@ Unigen sampled 10,010 trial sequences, 9,965 of which were unique. Numbering eac
 
 KUS sampled 10,000 trials sequences, all of which were unique.
 
-\begin{figure}
+\begin{figure}[t]
 \centering
 \centerline{\includegraphics[origin=c,width=12cm]{../figures/kus-samples.pdf}}
 \caption{Distribution of Sequences Sampled by KUS}
@@ -283,7 +283,7 @@ KUS sampled 10,000 trials sequences, all of which were unique.
 
 Spur sampled 10,000 trial sequences, 9,664 of which were unique. 332 sequences were selected twice, and 2 were selected three times. No sequences were selected more than three times.
 
-\begin{figure}
+\begin{figure}[t]
 \centering
 \centerline{\includegraphics[origin=c,width=12cm]{../figures/spur-samples.pdf}}
 \caption{Distribution of Sequences Sampled by Spur}
