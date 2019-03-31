@@ -143,6 +143,7 @@ block        = fully_cross_block(design, crossing, constraints)
 from sweetpea.encoding_diagram import print_encoding_diagram
 print_encoding_diagram(block)
 
+print(block.variables_per_sample())
 # from sweetpea.metrics import collect_design_metrics
 # metrics = collect_design_metrics(block)
 

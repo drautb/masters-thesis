@@ -2,9 +2,11 @@
 \contentsline {table}{\numberline {1.2}{\ignorespaces Growth of Solution Space}}{6}
 \contentsline {table}{\numberline {3.1}{\ignorespaces Benchmark Experiments}}{12}
 \contentsline {table}{\numberline {3.2}{\ignorespaces Time to Solve for 1 Solution with CryptoMiniSat}}{13}
-\contentsline {table}{\numberline {3.3}{\ignorespaces Time to Generate 10 Samples with Unigen}}{13}
-\contentsline {table}{\numberline {3.4}{\ignorespaces d-DNNF Compilation for Sampling with KUS}}{14}
-\contentsline {table}{\numberline {3.5}{\ignorespaces Time to Generate 10 Samples with KUS}}{14}
-\contentsline {table}{\numberline {3.6}{\ignorespaces Time to Generate 10 Samples with Spur}}{15}
-\contentsline {table}{\numberline {5.1}{\ignorespaces Benchmark Experiments for Sequence Construction}}{31}
-\contentsline {table}{\numberline {5.2}{\ignorespaces Sampling Metrics}}{31}
+\contentsline {table}{\numberline {3.3}{\ignorespaces Time to Compute Approximate Model Count with ApproxMC}}{14}
+\contentsline {table}{\numberline {3.4}{\ignorespaces Independent Support Size for Benchmark Experiments}}{16}
+\contentsline {table}{\numberline {3.5}{\ignorespaces Time to Generate 10 Samples with Unigen}}{16}
+\contentsline {table}{\numberline {3.6}{\ignorespaces d-DNNF Compilation for Sampling with KUS}}{17}
+\contentsline {table}{\numberline {3.7}{\ignorespaces Time to Generate 10 Samples with KUS}}{17}
+\contentsline {table}{\numberline {3.8}{\ignorespaces Time to Generate 10 Samples with Spur}}{18}
+\contentsline {table}{\numberline {5.1}{\ignorespaces Benchmark Experiments for Sequence Construction}}{34}
+\contentsline {table}{\numberline {5.2}{\ignorespaces Sampling Metrics}}{34}
