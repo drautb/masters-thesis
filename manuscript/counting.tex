@@ -46,9 +46,46 @@ We could also define $C_{B_S}$ and $C_{B_I}$, however there will be no benefit t
 
 The partition of $D$ with which we are concerned is therefore: $\{C_B, C_D, \overline{C}_{B_S}, \overline{C}_{B_I}, \overline{C}_D\}$, as shown in figure \ref{fig:partition}.
 
+% \begin{figure}[t]
+% \centering
+% \centerline{\includegraphics[origin=c,width=12cm]{../figures/partition.jpg}}
+% \caption{Partition of an Experimental Design}
+% \label{fig:partition}
+% \end{figure}
+
 \begin{figure}[t]
 \centering
-\centerline{\includegraphics[origin=c,width=12cm]{../figures/partition.jpg}}
+\begin{tikzpicture}[auto]
+\begin{scope}[every node/.style={circle,thick,draw}]
+    \node (D) at (8,8) {$D$};
+
+    \node (C) at (4,6) {$C$};
+    \node (CBar) at (12,6) {$\overline{C}$};
+
+    \node[draw=red] (CB) at (2,4) {$C_B$};
+    \node[draw=red] (CD) at (6,4) {$C_D$};
+    \node (CBarB) at (10,4) {$\overline{C}_B$};
+    \node[draw=red] (CBarD) at (14,4) {$\overline{C}_D$};
+
+    \node[draw=red] (CBarBS) at (8,2) {$\overline{C}_{B_S}$};
+    \node[draw=red] (CBarBI) at (12,2) {$\overline{C}_{B_I}$};
+\end{scope}
+
+\begin{scope}[every node/.style={fill=white,circle},
+              every edge/.style={draw=black,very thick}]
+    \path [->] (D) edge node {} (C);
+    \path [->] (D) edge node {} (CBar);
+
+    \path [->] (C) edge node {} (CB);
+    \path [->] (C) edge node {} (CD);
+
+    \path [->] (CBar) edge node {} (CBarB);
+    \path [->] (CBar) edge node {} (CBarD);
+
+    \path [->] (CBarB) edge node {} (CBarBS);
+    \path [->] (CBarB) edge node {} (CBarBI);
+\end{scope}
+\end{tikzpicture}
 \caption{Partition of an Experimental Design}
 \label{fig:partition}
 \end{figure}
