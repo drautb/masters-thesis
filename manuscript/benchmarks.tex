@@ -145,6 +145,10 @@ task-switching-cue-switching           & 24,594  \\ \hline
 
 % Time to sample with 10 samples
 
+% python -m timeit "__import__('os').system('unigen --verbosity=0 --kappa=0.638 --pivotUniGen=27 --maxLoopTime=3000 --maxTotalTime=36000 --pivotAC=60 --gaussuntil=400 --samples=10 --startIteration=13 stroop-3.cnf stroop3-unigen.out')"
+
+% python -m timeit "__import__('os').system('unigen --verbosity=0 --kappa=0.638 --pivotUniGen=27 --maxLoopTime=3000 --maxTotalTime=36000 --pivotAC=60 --gaussuntil=400 --samples=10 --startIteration=38 stroop-4.cnf stroop4-unigen.out')"
+
 \begin{table}[t]
   \centering
   \caption{Time to Generate 10 Samples with Unigen}
@@ -152,17 +156,17 @@ task-switching-cue-switching           & 24,594  \\ \hline
 \hline
 \multicolumn{1}{|l|}{Experiment Name} & Time to Sample  \\ \hline
 stroop-2                              & -               \\ \hline
-stroop-3                              &            \\ \hline % python -m timeit "__import__('os').system('unigen --verbosity=0 --kappa=0.638 --pivotUniGen=27 --maxLoopTime=3000 --maxTotalTime=36000 --pivotAC=60 --gaussuntil=400 --samples=10 --startIteration=13 stroop-3.cnf
-stroop-4                              &        \\ \hline % python -m timeit "__import__('os').system('unigen --verbosity=0 --kappa=0.638 --pivotUniGen=27 --maxLoopTime=3000 --maxTotalTime=36000 --pivotAC=60 --gaussuntil=400 --samples=10 --startIteration=38 stroop-3.cnf
-stroop-5                              &        \\ \hline
-stroop-congruency-balanced            &        \\ \hline
-stroop-response                       &        \\ \hline
-padmala-pessoa                        &        \\ \hline
-task-switching                        &        \\ \hline
-task-switching-2                      &        \\ \hline
+stroop-3                              & 2.18s           \\ \hline
+stroop-4                              &                 \\ \hline
+stroop-5                              &                 \\ \hline
+stroop-congruency-balanced            &                 \\ \hline
+stroop-response                       &                 \\ \hline
+padmala-pessoa                        &                 \\ \hline
+task-switching                        &                 \\ \hline
+task-switching-2                      &                 \\ \hline
 task-switching-cue-switching          & -               \\ \hline
 \end{tabular}
-\label{tab:benchmark_experiments_unigen}%
+\label{tab:benchmark_experiments_unigen}
 \end{table}
 
 This shortcoming is proved out in practice, as Unigen fails to count or sample from formulae where $|S| > 100$. Table \ref{tab:benchmark_experiments_unigen} denotes the time required for Unigen to generate 10 samples for each experiment when an estimate for $|R_F|$ is provided manually based on the factorial of the sequence length. Nearly all of them fail to complete in the allotted time. Because Unigen can only effectively sample large formulae when $|S|$ is small, in practice $|S| < 100$, it is insufficient for the needs of SweetPea. Several other samplers were tested as well, but in our experiments, none of them were successful.
