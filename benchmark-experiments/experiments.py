@@ -22,7 +22,7 @@ def __build_stroop_block(color_count):
         DerivedLevel("no",  WithinTrial(op.ne, [color, text]))
     ])
 
-    constraints = [AtMostKInARow(1, ("congruent?", "yes"))]
+    constraints = [AtMostKInARow(1, ("congruent?", "yes")), AtMostKInARow(3, color), AtMostKInARow(3, text)]
 
     return fully_cross_block([color, text, congruent], [color, text], constraints)
 
