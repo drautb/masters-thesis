@@ -15,12 +15,22 @@ Suppose we have $n$ numeric intervals, each from $[0, r_n)$. Revisiting the mult
 
 We begin by computing $j \% r_1$, and saving the result as the selection for the first interval. We then recompute $j$ to be $j = \lfloor \frac{j}{r_1} \rfloor$ before moving on to the next range. This process is repeated for $r_2,r_3,...,r_n$ until the full combination is developed. Figure \ref{fig:interval_breakdown} gives a visual representation of this breakdown for 3 ranges, $r_1 = 3, r_2 = 4$, and $r_3 = 2$.
 
-\begin{figure}[t]
+\begin{figure}[htb]
 \centering
 \centerline{\includegraphics[origin=c,width=12cm]{../figures/interval-breakdown.jpg}}
 \caption{Decomposing a Number into Constituent Ranges}
 \label{fig:interval_breakdown}
 \end{figure}
+
+% TODO:
+\begin{table}[htb]
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c}
+\cline{1-24}
+{\color[HTML]{00009B} 0} & {\color[HTML]{00009B} 1} & {\color[HTML]{00009B} 0} & {\color[HTML]{00009B} 1} & {\color[HTML]{00009B} 0} & {\color[HTML]{00009B} 1} & {\color[HTML]{00009B} 0} & {\color[HTML]{00009B} 1} & {\color[HTML]{00009B} 0} & {\color[HTML]{00009B} 1} & {\color[HTML]{00009B} 0} & {\color[HTML]{00009B} 1} & {\color[HTML]{00009B} 0} & {\color[HTML]{00009B} 1} & {\color[HTML]{00009B} 0} & {\color[HTML]{00009B} 1} & {\color[HTML]{00009B} 0} & {\color[HTML]{00009B} 1} & {\color[HTML]{00009B} 0} & {\color[HTML]{00009B} 1} & {\color[HTML]{00009B} 0} & {\color[HTML]{00009B} 1} & {\color[HTML]{00009B} 0} & {\color[HTML]{00009B} 1} & \%2 \\ \cline{1-24}
+\multicolumn{2}{|c|}{{\color[HTML]{013300} 0}}      & \multicolumn{2}{c|}{{\color[HTML]{013300} 1}}       & \multicolumn{2}{c|}{{\color[HTML]{013300} 2}}       & \multicolumn{2}{c|}{{\color[HTML]{013300} 3}}       & \multicolumn{2}{c|}{{\color[HTML]{013300} 0}}       & \multicolumn{2}{c|}{{\color[HTML]{013300} 1}}       & \multicolumn{2}{c|}{{\color[HTML]{013300} 2}}       & \multicolumn{2}{c|}{{\color[HTML]{013300} 3}}       & \multicolumn{2}{c|}{{\color[HTML]{013300} 0}}       & \multicolumn{2}{c|}{{\color[HTML]{013300} 1}}       & \multicolumn{2}{c|}{{\color[HTML]{013300} 2}}       & \multicolumn{2}{c|}{{\color[HTML]{013300} 3}}       & \%4 \\ \cline{1-24}
+\multicolumn{8}{|c|}{{\color[HTML]{CB0000} 0}}                                                                                                                                                                        & \multicolumn{8}{c|}{{\color[HTML]{CB0000} 1}}                                                                                                                                                                         & \multicolumn{8}{c|}{{\color[HTML]{CB0000} 2}}                                                                                                                                                                         & \%3 \\ \cline{1-24}
+\end{tabular}
+\end{table}
 
 This technique is used repeatedly in the construction algorithm.
 
@@ -34,7 +44,7 @@ For example, because the elements $\{1, 2, 3, 4, 5\}$ are in order, the correspo
 
 An inversion sequence can be used to generate the associated permutation by using the inversions to select where to place each element. Given an inversion sequence $a_1, a_2, ... a_n$, begin with $n$ empty locations. Beginning with $a_1$, skip $a_i$ empty locations before inserting the $i^{th}$ element of $S$. Using the previous example, this algorithm is demonstrated in Figure \ref{fig:inversion_sequence}.
 
-\begin{figure}[t]
+\begin{figure}[htb]
 \centering
 \centerline{\includegraphics[origin=c,width=12cm]{../figures/inv-seq.jpg}}
 \caption{Construction of a Permutation from its Inversion Sequence}
@@ -86,7 +96,7 @@ The selected values for independent basic factors are converted in similar fashi
 
 Lastly, the selected values for source combinations must be converted. These are slightly more complex, as the viable combinations vary based on the selected levels for each trial. It would be incorrect to select a source combination from the $n^{th}$ set of valid source combinations for the $n^{th}$ trial, because the permutation may have shifted the position of the original $n^{th}$ trial in the sequence. A mult-level indexing scheme is employed to ensure that the selected value is used to map exclusively to valid combinations, in which the permtuted values are used to index into the correct set of valid source combinations. This is shown in Figure \ref{fig:source_combinations}.
 
-\begin{figure}[t]
+\begin{figure}[htb]
 \centering
 \centerline{\includegraphics[origin=c,width=12cm]{../figures/source-combinations.jpg}}
 \caption{Selecting Valid Source Combinations}
@@ -109,14 +119,12 @@ In the future, the counting and construction algorithms could be enhanced to acc
 
 \section{Benchmarks}
 
-% TODO: Repeat benchmarks from chapter 2 that apply here.
-
 Of the ten benchmarks designs that were introduced in chapter 2, 4 can be classified as tier 1, 2, or 3 designs: \texttt{stroop-2}, \texttt{stroop-3}, \texttt{stroop-4}, \texttt{stroop-5}. We will repeat the benchmarks for those designs here using this construction approach to sampling. We will also introduce a few additional designs involving variations on the Stroop design to demonstrate the scalability of this approach, and the empirical performance of the rejection sampling phase. Table \ref{tab:benchmark_experiments_construction} reviews the basic experiment data for each benchmark design. Table \ref{tab:sampling_metrics} summarizes the time required to generate 10,000 samples for each design using a single core, as well as the average number of rejections per sample. (Rejctions caused by constructing a trial sequence that violated external constraints.)
 
 % Extra constraints:
 % constraints = [AtMostKInARow(1, ("congruent?", "yes")), AtMostKInARow(3, color), AtMostKInARow(3, text)]
 
-\begin{table}[t]
+\begin{table}[htb]
   \centering
   \caption{Benchmark Experiments for Sequence Construction}
 \begin{tabular}{|c|c|c|c|c|}
@@ -135,7 +143,7 @@ stroop-20-extra-constraints           & 400             & $\approx 2^{2886}$    
 
 For even large designs, this approach allows a single random sample to be constructed extremely quickly.
 
-\begin{table}[t]
+\begin{table}[htb]
   \centering
   \caption{Sampling Metrics}
 \begin{tabular}{|c|c|c|c|c|}

@@ -54,7 +54,7 @@ AtMostKInARow(1, ("congruent?", "yes"))
 
 The current encoding scheme will allocate 72 variables to represent each level of each factor in each trial. Additional variables will be allocated to enforce other constraints, such as ensuring that each factor takes only one level in each trial, and requiring that each crossing be present in the sequence. The first step of the encoding can be visualized easily, as demonstrated in Table \ref{tab:encoding_diagram}.
 
-\begin{table}[t]
+\begin{table}[htb]
   \centering
   \caption{Example of an Encoding Diagram}
 \begin{tabular}{|r|c|c|c|c|c|c|c|c|}
@@ -93,7 +93,7 @@ SweetPea sounds panacean, but it has yet to fully realize its objectives. It rel
 
 A solution to the formula represents a unique trial \textbf{sequence} in the design. Therefore every possible sequence permutation (so long as it upholds the design constraints) is also a distinct solution. Consequentially, the number of solutions grows factorially in the sequence length. In the above example, the sequence length, denoted $l$, was $9$. Assuming the congruence constraint were removed, there would be $9! = 362,880$ solutions, which is still reasonable. Consider an experiment however in which $l = 36$. The solution count grows to $36! \approx 2^{138}$, which is intractable. As will be seen in chapter 3, it is common for experimental designs to have sequence lengths even larger than 36.
 
-\begin{table}[t]
+\begin{table}[htb]
   \centering
   \caption{Growth of Solution Space}
 \begin{tabular}{|l|r|}

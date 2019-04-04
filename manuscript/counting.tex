@@ -53,7 +53,7 @@ The partition of $D$ with which we are concerned is therefore: $\{C_B, C_D, \ove
 % \label{fig:partition}
 % \end{figure}
 
-\begin{figure}[t]
+\begin{figure}[htb]
 \centering
 \begin{tikzpicture}[auto]
 \begin{scope}[every node/.style={circle,thick,draw}]
@@ -103,9 +103,6 @@ Tier 2 designs introduce basic factors that are not in $C$, and are thus less co
 s = l! \cdot \prod_{i=1}^{|\overline{C}_{B_I}|} |f_i|^l
 \]
 
-% TODO: Comment on the fact that a user can specify an unsatisfiable crossing, in which the solution count is 0.
-% The solver detects this in practice.
-
 % TODO: End of 4.3: It's not immediately obvious that computing the level-3
 % solution-space size is tractable, but I think SweetPea's implementation
 % relies on being able to do this (i.e., I think it builds up a truth
@@ -116,7 +113,7 @@ With tier 3 designs come derived factors. It is now possible that all sets in th
 
 Derived factors allow the user to provide an arbitrary predicate for each level in the factor. We have not solved the halting problem, so we will need to apply these predicates to different argument combinations in order to determine which inputs are acceptable for each trial. We define $X_S$ to be the set of ordered pairs representing the crossing of factors in $\overline{C}_{B_S}$, also referred to as the \textit{source crossing}. The next task is to determine, for every element in $X$, which elements of $X_S$ are compatible using the user-defined predicates.
 
-For every ordered pair $t \in X$, there is some number of items in $t$ corresponding to derived factor levels, labeled $d_1, d_2, \cdot\cdot\cdot d_{|C_D|}$ comprising the set $V_t$. Each $d \in V$ is associated with a predicate\footnote{These predicates, also called derivation functions, are expected to be deterministic. If they are non-deterministic, then inconsistent solutions may be produced as the predicates may be applied more than once to the same arguments. This could also be handled by ensuring that each predicate is only applied once to each argument combination and the results are saved.}, $pred(d)$. For every $t \in X$, every $b \in X_S$ is consulted to see if the predicates for all $d \in V_t$ are satisfied. If any one of them is not satisfied, then $b$ is not a compatible choice for $t$, and must be discarded from consideration for $t$. Once this process is complete, we are left with a list of subsets of $X_S$, in which the $n^{th}$ subset indicates which elements of $X_S$ are compatible with the $n^{th}$ crossing in $X$.
+For every ordered pair $t \in X$, there is some number of items in $t$ corresponding to derived factor levels, labeled $d_1, d_2, \cdot\cdot\cdot d_{|C_D|}$ comprising the set $V_t$. Each $d \in V$ is associated with a predicate\footnote{These predicates, also called derivation functions, are expected to be deterministic. If they are non-deterministic, then inconsistent solutions may be produced as the predicates may be applied more than once to the same arguments. This could also be handled by ensuring that each predicate is only applied once to each argument combination and the results are saved.}, $pred(d)$. For every $t \in X$, every $b \in X_S$ is consulted to see if the predicates for all $d \in V_t$ are satisfied\footnote{If $X$ is very large, then testing all combinations could become intractable. However in practice, $X$ is relatively small, typically $|X| < 500$. Additionally, SweetPea's current implementation relies on $X$ being small enough for this to work, as a similar process is followed when generating the SAT encoding for derived factors.}. If any one of them is not satisfied, then $b$ is not a compatible choice for $t$, and must be discarded from consideration for $t$. Once this process is complete, we are left with a list of subsets of $X_S$, in which the $n^{th}$ subset indicates which elements of $X_S$ are compatible with the $n^{th}$ crossing in $X$.
 
 More formally, let $S$ be a list of items $J_1, J_2, \cdot\cdot\cdot J_{|X|}$. The following statements are true:
 
@@ -133,9 +130,75 @@ s = l! \cdot \prod_{i=1}^{|\overline{C}_{B_I}|} |f_i|^l \cdot \prod_{k=1}^{|S|} 
 
 The total number of solutions $s$ for an experimental design, is the product of the number of permutations of the crossed factors, the number of combinations of each independent factor, and the number of acceptable combinations of all source factors.
 
+It is possible for the user to specify a crossing that is not satisfiable. Referring back to the Stroop example, the user may include all three factors, \texttt{color}, \texttt{text}, and \texttt{congruent}, in the crossing. This is unsatisfiable because some level combinations violate the rules of the derived factor. For example, \texttt{color=red}, \texttt{text=blue}, and \texttt{congruent=yes} is invalid because \texttt{red} and \texttt{blue} are not congruent according to the predicates for \texttt{congruent}. If such a crossing is specified, this will correctly identify the number of potential solutions as zero.
 
 \section{Example}
 
-TODO
+Consider a design composed of the same factors as the Stroop example:
+
+\begin{verbatim}
+color = Factor("color", ["red", "green", "blue"])
+text  = Factor("text",  ["red", "green", "blue"])
+
+congruent = Factor("congruent?", [
+    DerivedLevel("yes", WithinTrial(operator.eq, [color, text])),
+    DerivedLevel("no",  WithinTrial(operator.ne, [color, text]))
+])
+\end{verbatim}
+
+However, rather than crossing \texttt{color} and \texttt{text}, we will demonstrate an example in which \texttt{color} and \texttt{congruent?} are crossed. For this design, the partition of $D$ becomes:
+
+\begin{gather*}
+    C_B = \{\texttt{color}\} \quad C_D = \{\texttt{congruent?}\}  \quad  \overline{C}_{B_S} = \{\texttt{text}\} \\
+    \overline{C}_{B_I} = \emptyset \qquad\qquad \overline{C}_D = \emptyset
+\end{gather*}
+
+The crossing, or $X$, is the cartesian product of levels of \texttt{color} and \texttt{congruent?}. This is generated exhaustively.
+
+\begin{align*}
+X = \{(red, yes), (green, yes), (blue, yes), (red, no), (green, no), (blue, no)\}
+\end{align*}
+
+The size of the crossing determines the sequence length, therefore $l = |X| = 6$. As a result, the first term, $l!$, becomes $6! = 720$.
+
+In this design, there are no basic independent factors outside the crossing: $\overline{C}_{B_I} = \emptyset$. Therefore there is no value for the second term.
+
+For the third and final term, we need to first determine $X_S$, the cartesian product of levels of factors in $\overline{C}_{B_S}$. For this design, the only factor in $\overline{C}_{B_S}$ is \texttt{text}. As a result, $X_S$ is simply the levels in \texttt{text}:
+
+\[
+X_S = \{red, green, blue\}
+\]
+
+At this point, each element of the product of $X$ and $X_S$ must be checked for validity under the derived factor definitions in the design to determine the subsets of $X_S$ that are valid for each element in $X$. In terms of this example, which level selections in $X_S$ do \textit{not} violate the definition of \texttt{congruent?} when paired with each level selection combination in $X$? These subsets comprise $S$ as defined previously. Table \ref{tab:example_s} gives a visual representation of this process.
+
+\begin{table}[htb]
+  \centering
+  \caption{Computing $S$ for Solution Counting}
+\begin{tabular}{r|c|c|c|c}
+\cline{2-4}
+\multicolumn{1}{c|}{}              & \multicolumn{3}{c|}{$X_S$}                 & \multicolumn{1}{l}{}                     \\ \hline
+\multicolumn{1}{|c|}{$X$}          & red          & green        & blue         & \multicolumn{1}{c|}{$J$}                 \\ \hline
+\multicolumn{1}{|r|}{(red, yes)}   & $\checkmark$ &              &              & \multicolumn{1}{c|}{$\{(red\}$}         \\ \hline
+\multicolumn{1}{|r|}{(green, yes)} &              & $\checkmark$ &              & \multicolumn{1}{c|}{$\{(green\}$}       \\ \hline
+\multicolumn{1}{|r|}{(blue, yes)}  &              &              & $\checkmark$ & \multicolumn{1}{c|}{$\{(blue\}$}        \\ \hline
+\multicolumn{1}{|r|}{(red, no)}    &              & $\checkmark$ & $\checkmark$ & \multicolumn{1}{c|}{$\{(green, blue)\}$} \\ \hline
+\multicolumn{1}{|r|}{(green, no)}  & $\checkmark$ &              & $\checkmark$ & \multicolumn{1}{c|}{$\{(red, blue)\}$}   \\ \hline
+\multicolumn{1}{|r|}{(blue, no)}   & $\checkmark$ & $\checkmark$ &              & \multicolumn{1}{c|}{$\{(red, green)\}$}  \\ \hline
+\end{tabular}
+\label{tab:example_s}%
+\end{table}
+
+$S$ is therefore:
+
+\[
+S = \{(red), (green), (blue), (green, blue), (red, blue), (red, green)\}
+\]
+
+With $S$ defined, we may now compute the third term of the formula:
+\[
+    \prod_{k=1}^{|S|} |J_k| = 1 \cdot 1 \cdot 1 \cdot 2 \cdot 2 \cdot 2 = 8
+\]
+This yields the final solution count of $s = 720 \cdot 8 = 5,760$. This count can also be confirmed by generating the corresponding SAT encoding for this design and applying a model counter to the generated CNF.
+
 
 % TODO: Correctness proof? MEntion that counts have been tested with SAT model counters?
