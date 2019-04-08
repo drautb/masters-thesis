@@ -53,13 +53,13 @@
 \ifuuthesis@needtocspace \vspace {\uuthesis@chaptersectionspace } \fi \global \uuthesis@needtocspacefalse 
 \contentsline {subsection}{\numberline {5.1.2}Permutations}{32}
 \ifuuthesis@needtocspace \vspace {\uuthesis@chaptersectionspace } \fi \global \uuthesis@needtocspacefalse 
-\contentsline {subsection}{\numberline {5.1.3}Combinations}{34}
-\contentsline {section}{\numberline {5.2}Construction Algorithm}{34}
-\contentsline {subsection}{\numberline {5.2.1}Interval Mapping for an Experimental Design}{34}
-\contentsline {subsection}{\numberline {5.2.2}Mapping Selected Values to Levels}{35}
-\contentsline {section}{\numberline {5.3}Example}{37}
-\contentsline {section}{\numberline {5.4}Handling Constraints}{37}
-\contentsline {section}{\numberline {5.5}Benchmarks}{37}
-\contentsline {chapter}{\numberline {6.}\hyphenpenalty =10000\exhyphenpenalty =10000\relax \linepenalty =0 \uppercase {Future Work}\global \uuthesis@needtocspacetrue }{39}
-\contentsline {chapter}{\numberline {7.}\hyphenpenalty =10000\exhyphenpenalty =10000\relax \linepenalty =0 \uppercase {Conclusion}\global \uuthesis@needtocspacetrue }{41}
-\contentsline {chapter}{REFERENCES}{42}
+\contentsline {subsection}{\numberline {5.1.3}Combinations}{33}
+\contentsline {section}{\numberline {5.2}Construction Algorithm}{33}
+\contentsline {subsection}{\numberline {5.2.1}Interval Mapping for an Experimental Design}{35}
+\contentsline {subsection}{\numberline {5.2.2}Mapping Selected Values to Levels}{36}
+\contentsline {section}{\numberline {5.3}Example}{36}
+\contentsline {section}{\numberline {5.4}Handling Constraints}{38}
+\contentsline {section}{\numberline {5.5}Benchmarks}{38}
+\contentsline {chapter}{\numberline {6.}\hyphenpenalty =10000\exhyphenpenalty =10000\relax \linepenalty =0 \uppercase {Future Work}\global \uuthesis@needtocspacetrue }{40}
+\contentsline {chapter}{\numberline {7.}\hyphenpenalty =10000\exhyphenpenalty =10000\relax \linepenalty =0 \uppercase {Conclusion}\global \uuthesis@needtocspacetrue }{42}
+\contentsline {chapter}{REFERENCES}{43}

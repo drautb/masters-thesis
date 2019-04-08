@@ -13,7 +13,15 @@ There are several critical components of constructing a solution based on a natu
 
 Suppose we have $n$ numeric intervals, each from $[0, r_n)$. Revisiting the multiplication principle, we can see that there are $m = \prod_1^n r_n$ unique combinations of individual values from each interval. If $j$ is an number selected from $[0, m)$, we can map $j$ to a unique combination of interval value selections using the modulo and division operators. (This technique will still work even when $j \geq m$, but combinations will begin to repeat.)
 
-We begin by computing $j \% r_1$, and saving the result as the selection for the first interval. We then recompute $j$ to be $j = \lfloor \frac{j}{r_1} \rfloor$ before moving on to the next range. This process is repeated for $r_2,r_3,...,r_n$ until the full combination is developed. Figure \ref{fig:interval_breakdown} gives a visual representation of this breakdown for 3 ranges, $r_1 = 3, r_2 = 4$, and $r_3 = 2$.
+We begin by computing $j \bmod r_1$, and saving the result as the selection for the first interval. We then recompute $j$ to be $j = \lfloor \frac{j}{r_1} \rfloor$ before moving on to the next range. This process is repeated for $r_2,r_3,...,r_n$ until the full combination is developed. For example, if we had $U = \{3, 2, 4\}$ as the set of upper range bounds, then there are $3 \cdot 4 \cdot 2 = 24$ possible combinations of interval values. Suppose we want to compute the interval selections for $17$. This would be done as follows:
+
+\begin{align*}
+i = 17   &&  R_1 = 17 \bmod 3 = 2  &&  i = \Bigl\lfloor \frac{17}{3} \Bigr\rfloor = 5   \\
+i = 5    &&  R_2 = 5 \bmod 4 = 1   &&  i = \Bigl\lfloor \frac{5}{4} \Bigr\rfloor = 1    \\
+i = 1    &&  R_3 = 1 \bmod 2 = 1   &&                                                   \\
+\end{align*}
+
+Thus $R = \{2, 1, 1\}$. Figure \ref{fig:interval_breakdown} gives a visual representation of this breakdown, as well as indicates the order in which each interval combination is selected. (TODO)
 
 \begin{figure}[htb]
 \centering
@@ -21,16 +29,6 @@ We begin by computing $j \% r_1$, and saving the result as the selection for the
 \caption{Decomposing a Number into Constituent Ranges}
 \label{fig:interval_breakdown}
 \end{figure}
-
-% TODO:
-\begin{table}[htb]
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c}
-\cline{1-24}
-{\color[HTML]{00009B} 0} & {\color[HTML]{00009B} 1} & {\color[HTML]{00009B} 0} & {\color[HTML]{00009B} 1} & {\color[HTML]{00009B} 0} & {\color[HTML]{00009B} 1} & {\color[HTML]{00009B} 0} & {\color[HTML]{00009B} 1} & {\color[HTML]{00009B} 0} & {\color[HTML]{00009B} 1} & {\color[HTML]{00009B} 0} & {\color[HTML]{00009B} 1} & {\color[HTML]{00009B} 0} & {\color[HTML]{00009B} 1} & {\color[HTML]{00009B} 0} & {\color[HTML]{00009B} 1} & {\color[HTML]{00009B} 0} & {\color[HTML]{00009B} 1} & {\color[HTML]{00009B} 0} & {\color[HTML]{00009B} 1} & {\color[HTML]{00009B} 0} & {\color[HTML]{00009B} 1} & {\color[HTML]{00009B} 0} & {\color[HTML]{00009B} 1} & \%2 \\ \cline{1-24}
-\multicolumn{2}{|c|}{{\color[HTML]{013300} 0}}      & \multicolumn{2}{c|}{{\color[HTML]{013300} 1}}       & \multicolumn{2}{c|}{{\color[HTML]{013300} 2}}       & \multicolumn{2}{c|}{{\color[HTML]{013300} 3}}       & \multicolumn{2}{c|}{{\color[HTML]{013300} 0}}       & \multicolumn{2}{c|}{{\color[HTML]{013300} 1}}       & \multicolumn{2}{c|}{{\color[HTML]{013300} 2}}       & \multicolumn{2}{c|}{{\color[HTML]{013300} 3}}       & \multicolumn{2}{c|}{{\color[HTML]{013300} 0}}       & \multicolumn{2}{c|}{{\color[HTML]{013300} 1}}       & \multicolumn{2}{c|}{{\color[HTML]{013300} 2}}       & \multicolumn{2}{c|}{{\color[HTML]{013300} 3}}       & \%4 \\ \cline{1-24}
-\multicolumn{8}{|c|}{{\color[HTML]{CB0000} 0}}                                                                                                                                                                        & \multicolumn{8}{c|}{{\color[HTML]{CB0000} 1}}                                                                                                                                                                         & \multicolumn{8}{c|}{{\color[HTML]{CB0000} 2}}                                                                                                                                                                         & \%3 \\ \cline{1-24}
-\end{tabular}
-\end{table}
 
 This technique is used repeatedly in the construction algorithm.
 
@@ -51,7 +49,7 @@ An inversion sequence can be used to generate the associated permutation by usin
 \label{fig:inversion_sequence}
 \end{figure}
 
-Finally, we can construct $j^{th}$ inversion sequence of a set by applying the interval mapping technique introduced previously. The maximum value of each position in the inversion sequence is used to construct the intervals. To construct an inversion sequence of $n$ inversions, the limits for the intervals are $\{n, n - 1, n - 2, ..., 2, 1\}$. Lastly a zero is always appended as the final element in the sequence.
+Finally, we can construct $j^{th}$ inversion sequence of a set by applying the interval mapping technique introduced previously. The maximum value of each position in the inversion sequence is used to construct the intervals. To construct an inversion sequence of $n$ inversions, the limits for the intervals are $\{n, n - 1, n - 2, ..., 2, 1\}$.
 
 \subsection{Combinations}
 
@@ -108,7 +106,45 @@ For example, if the selected permutation places the original crossing value for 
 
 \section{Example}
 
-TODO
+Continuing on with the example from Chapter 4, we will construct a single solution to the design for which the total number of solutions was counted. We will choose a solution at random from $[1, 5,760]$, $2,590$. First, we compute the range of value selections, $R$, for the $2,590^{th}$ solution. In order to do this, we first compute $U$, the set of upper-bounds for each range. The upper bound is the number of permutations, $l!$, for the design. For this example, this was determined to be $720$ in chapter 4. Adding the sizes of the subsets in $S$, we determine $U = \{720, 1, 1, 1, 2, 2, 2\}$. Because $\overline{C}_{B_I} = \emptyset$ and $\overline{C}_D = \emptyset$ in this example, there are no other bounds to compute. When interval mapping is applied to $2,590$ to generate values from these ranges, $R$ is determined to be $R = \{430, 0, 0, 0, 1, 1, 0\}$. With $R$ computed, we can now use the selected values to generate the correct permutation, and then select level combinations for the remaining factors.
+
+To generate the $430^{th}$ permutation, we first construct the $430^{th}$ inversion sequence by again applying interval mapping with $U = \{6, 5, 4, 3, 2, 1\}$. This yields $\{4, 1, 2, 0, 1 ,0\}$ as the $430^{th}$ inversion sequence. Applying the algorithm to convert this sequence to its corresponding permutation, we obtain $\{3, 1, 5, 2, 0, 4\}$. Recall from chapter 4 that:
+
+\begin{align*}
+X = \{(red, yes), (red, no), (green, yes), (green, no), (blue, yes), (blue, no)\}
+\end{align*}
+
+The permutation $\{3, 1, 5, 2, 0, 4\}$ therefore corresponds to:
+
+\[
+	\{(green, no), (red, no), (blue, no), (green, yes), (red, yes), (blue, yes)\}
+\]
+
+
+
+% \begin{align*}
+% i = 2,590 &&  R_1 = 2,590 \bmod 720 = 430 && i = \Bigl\lfloor \frac{2,590}{720} \Bigr\rfloor = 3 \\
+% i = 3     &&  R_2 = 3 \bmod 1 = 0         && i = \Bigl\lfloor \frac{3}{1} \Bigr\rfloor = 3 \\
+% i = 3     &&  R_3 = 3 \bmod 1 = 0         && i = \Bigl\lfloor \frac{3}{1} \Bigr\rfloor = 3 \\
+% i = 3     &&  R_4 = 3 \bmod 1 = 0         && i = \Bigl\lfloor \frac{3}{1} \Bigr\rfloor = 3 \\
+% i = 3     &&  R_5 = 3 \bmod 2 = 1         && i = \Bigl\lfloor \frac{3}{2} \Bigr\rfloor = 1 \\
+% i = 1     &&  R_6 = 1 \bmod 2 = 1         && i = \Bigl\lfloor \frac{1}{2} \Bigr\rfloor = 0 \\
+% i = 0     &&  R_7 = 0 \bmod 2 = 0         &&                                               \\
+% \end{align*}
+
+% To generate the $430^{th}$ permutation, we first construct the $430^{th}$ inversion sequence by applying interval mapping with $U = \{6, 5, 4, 3, 2, 1\}$:
+
+% \begin{align*}
+% i = 430  &&  R_1 = 430 \bmod 6 = 4  &&  i = \Bigl\lfloor \frac{430}{6} \Bigr\rfloor = 71 \\
+% i = 71   &&  R_2 = 71 \bmod 5 = 1   &&  i = \Bigl\lfloor \frac{71}{5} \Bigr\rfloor = 14  \\
+% i = 14   &&  R_3 = 14 \bmod 4 = 2   &&  i = \Bigl\lfloor \frac{14}{4} \Bigr\rfloor = 3   \\
+% i = 3    &&  R_4 = 3 \bmod 3 = 0    &&  i = \Bigl\lfloor \frac{3}{3} \Bigr\rfloor = 1    \\
+% i = 1    &&  R_5 = 1 \bmod 2 = 1    &&  i = \Bigl\lfloor \frac{1}{2} \Bigr\rfloor = 0    \\
+% i = 0    &&  R_6 = 0 \bmod 1 = 0    &&                                                   \\
+% \end{align*}
+
+
+
 
 \section{Handling Constraints}
 

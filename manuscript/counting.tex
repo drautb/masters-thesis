@@ -156,7 +156,7 @@ However, rather than crossing \texttt{color} and \texttt{text}, we will demonstr
 The crossing, or $X$, is the cartesian product of levels of \texttt{color} and \texttt{congruent?}. This is generated exhaustively.
 
 \begin{align*}
-X = \{(red, yes), (green, yes), (blue, yes), (red, no), (green, no), (blue, no)\}
+X = \{(red, yes), (red, no), (green, yes), (green, no), (blue, yes), (blue, no)\}
 \end{align*}
 
 The size of the crossing determines the sequence length, therefore $l = |X| = 6$. As a result, the first term, $l!$, becomes $6! = 720$.
@@ -179,10 +179,10 @@ At this point, each element of the product of $X$ and $X_S$ must be checked for 
 \multicolumn{1}{c|}{}              & \multicolumn{3}{c|}{$X_S$}                 & \multicolumn{1}{l}{}                     \\ \hline
 \multicolumn{1}{|c|}{$X$}          & red          & green        & blue         & \multicolumn{1}{c|}{$J$}                 \\ \hline
 \multicolumn{1}{|r|}{(red, yes)}   & $\checkmark$ &              &              & \multicolumn{1}{c|}{$\{(red\}$}         \\ \hline
-\multicolumn{1}{|r|}{(green, yes)} &              & $\checkmark$ &              & \multicolumn{1}{c|}{$\{(green\}$}       \\ \hline
-\multicolumn{1}{|r|}{(blue, yes)}  &              &              & $\checkmark$ & \multicolumn{1}{c|}{$\{(blue\}$}        \\ \hline
 \multicolumn{1}{|r|}{(red, no)}    &              & $\checkmark$ & $\checkmark$ & \multicolumn{1}{c|}{$\{(green, blue)\}$} \\ \hline
+\multicolumn{1}{|r|}{(green, yes)} &              & $\checkmark$ &              & \multicolumn{1}{c|}{$\{(green\}$}       \\ \hline
 \multicolumn{1}{|r|}{(green, no)}  & $\checkmark$ &              & $\checkmark$ & \multicolumn{1}{c|}{$\{(red, blue)\}$}   \\ \hline
+\multicolumn{1}{|r|}{(blue, yes)}  &              &              & $\checkmark$ & \multicolumn{1}{c|}{$\{(blue\}$}        \\ \hline
 \multicolumn{1}{|r|}{(blue, no)}   & $\checkmark$ & $\checkmark$ &              & \multicolumn{1}{c|}{$\{(red, green)\}$}  \\ \hline
 \end{tabular}
 \label{tab:example_s}%
@@ -191,7 +191,7 @@ At this point, each element of the product of $X$ and $X_S$ must be checked for 
 $S$ is therefore:
 
 \[
-S = \{(red), (green), (blue), (green, blue), (red, blue), (red, green)\}
+S = \{(red), (green, blue), (green), (red, blue), (blue), (red, green)\}
 \]
 
 With $S$ defined, we may now compute the third term of the formula:
