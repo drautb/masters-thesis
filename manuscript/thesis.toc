@@ -1,65 +1,81 @@
 \contentsline {chapter}{\uppercase {Abstract}}{iii}
 \contentsline {chapter}{LIST OF FIGURES}{vii}
 \contentsline {chapter}{LIST OF TABLES}{viii}
+\contentsline {chapter}{\uppercase {Acknowledgements}}{ix}
 \unhbox \voidb@x \\[-1.2ex] \kern -1.5em\contentsline {}{\textbf {CHAPTERS}}{}
 \contentsline {chapter}{\numberline {1.}\hyphenpenalty =10000\exhyphenpenalty =10000\relax \linepenalty =0 \uppercase {Motivation}\global \uuthesis@needtocspacetrue }{1}
 \ifuuthesis@needtocspace \vspace {\uuthesis@chaptersectionspace } \fi \global \uuthesis@needtocspacefalse 
-\contentsline {section}{\numberline {1.1}Introduction}{1}
-\contentsline {section}{\numberline {1.2}Current Implementation}{2}
-\contentsline {subsection}{\numberline {1.2.1}Boolean Satisfiability}{2}
-\contentsline {subsection}{\numberline {1.2.2}Example: Stroop Experiment}{3}
-\contentsline {subsection}{\numberline {1.2.3}One-to-One Correspondence}{4}
-\contentsline {section}{\numberline {1.3}Problems}{6}
-\contentsline {chapter}{\numberline {2.}\hyphenpenalty =10000\exhyphenpenalty =10000\relax \linepenalty =0 \uppercase {A Complexity Spectrum for SweetPea designs}\global \uuthesis@needtocspacetrue }{8}
+\contentsline {section}{\numberline {1.1}SweetPea Overview}{1}
 \ifuuthesis@needtocspace \vspace {\uuthesis@chaptersectionspace } \fi \global \uuthesis@needtocspacefalse 
-\contentsline {section}{\numberline {2.1}Factors and Windows}{8}
+\contentsline {subsection}{\numberline {1.1.1}Factors}{2}
 \ifuuthesis@needtocspace \vspace {\uuthesis@chaptersectionspace } \fi \global \uuthesis@needtocspacefalse 
-\contentsline {subsection}{\numberline {2.1.1}Factor Types}{8}
+\contentsline {subsection}{\numberline {1.1.2}Crossing}{4}
 \ifuuthesis@needtocspace \vspace {\uuthesis@chaptersectionspace } \fi \global \uuthesis@needtocspacefalse 
-\contentsline {subsection}{\numberline {2.1.2}Window Construction}{9}
-\contentsline {section}{\numberline {2.2}Complexity Gradation}{10}
-\contentsline {subsection}{\numberline {2.2.1}Tier 1}{10}
-\contentsline {subsection}{\numberline {2.2.2}Tier 2}{11}
-\contentsline {subsection}{\numberline {2.2.3}Tier 3}{11}
-\contentsline {subsection}{\numberline {2.2.4}Tier 4}{11}
-\contentsline {subsection}{\numberline {2.2.5}Tier 5}{11}
-\contentsline {chapter}{\numberline {3.}\hyphenpenalty =10000\exhyphenpenalty =10000\relax \linepenalty =0 \uppercase {Current Benchmarks}\global \uuthesis@needtocspacetrue }{12}
+\contentsline {subsection}{\numberline {1.1.3}Constraints}{4}
 \ifuuthesis@needtocspace \vspace {\uuthesis@chaptersectionspace } \fi \global \uuthesis@needtocspacefalse 
-\contentsline {section}{\numberline {3.1}Experiments}{12}
-\contentsline {section}{\numberline {3.2}Benchmarks}{12}
-\contentsline {subsection}{\numberline {3.2.1}CryptoMiniSat}{13}
-\contentsline {subsection}{\numberline {3.2.2}Unigen}{14}
-\contentsline {subsubsection}{\numberline {3.2.2.1}Model Counting}{15}
-\contentsline {subsubsection}{\numberline {3.2.2.2}XOR Clause Reduction}{15}
-\contentsline {subsection}{\numberline {3.2.3}KUS}{17}
-\contentsline {subsection}{\numberline {3.2.4}Spur}{19}
-\contentsline {section}{\numberline {3.3}Distribution of Samples}{19}
-\contentsline {subsection}{\numberline {3.3.1}Unigen}{20}
-\contentsline {subsection}{\numberline {3.3.2}KUS}{20}
-\contentsline {subsection}{\numberline {3.3.3}Spur}{21}
-\contentsline {subsection}{\numberline {3.3.4}CryptoMiniSat}{21}
-\contentsline {section}{\numberline {3.4}Summary}{22}
-\contentsline {chapter}{\numberline {4.}\hyphenpenalty =10000\exhyphenpenalty =10000\relax \linepenalty =0 \uppercase {Solution Counting}\global \uuthesis@needtocspacetrue }{24}
+\contentsline {subsection}{\numberline {1.1.4}Complete Example}{5}
+\contentsline {section}{\numberline {1.2}Current Implementation}{5}
+\contentsline {subsection}{\numberline {1.2.1}Boolean Satisfiability}{6}
+\contentsline {subsection}{\numberline {1.2.2}Example Encoding}{7}
+\contentsline {subsection}{\numberline {1.2.3}One-to-One Correspondence}{8}
+\contentsline {section}{\numberline {1.3}SweetPea's Contributions}{9}
+\contentsline {section}{\numberline {1.4}Conclusion}{9}
+\contentsline {chapter}{\numberline {2.}\hyphenpenalty =10000\exhyphenpenalty =10000\relax \linepenalty =0 \uppercase {A Complexity Spectrum for SweetPea designs}\global \uuthesis@needtocspacetrue }{12}
 \ifuuthesis@needtocspace \vspace {\uuthesis@chaptersectionspace } \fi \global \uuthesis@needtocspacefalse 
-\contentsline {section}{\numberline {4.1}Principles of Counting}{24}
-\contentsline {section}{\numberline {4.2}Partition of an Experimental Design}{25}
-\contentsline {section}{\numberline {4.3}Formula}{26}
-\contentsline {section}{\numberline {4.4}Example}{28}
-\contentsline {chapter}{\numberline {5.}\hyphenpenalty =10000\exhyphenpenalty =10000\relax \linepenalty =0 \uppercase {Sequence Construction}\global \uuthesis@needtocspacetrue }{31}
+\contentsline {section}{\numberline {2.1}Complexity Gradation}{12}
 \ifuuthesis@needtocspace \vspace {\uuthesis@chaptersectionspace } \fi \global \uuthesis@needtocspacefalse 
-\contentsline {section}{\numberline {5.1}Enumerating Permutations and Combinations}{31}
+\contentsline {subsection}{\numberline {2.1.1}Tier 1}{12}
 \ifuuthesis@needtocspace \vspace {\uuthesis@chaptersectionspace } \fi \global \uuthesis@needtocspacefalse 
-\contentsline {subsection}{\numberline {5.1.1}Interval Mapping}{31}
+\contentsline {subsection}{\numberline {2.1.2}Tier 2}{13}
 \ifuuthesis@needtocspace \vspace {\uuthesis@chaptersectionspace } \fi \global \uuthesis@needtocspacefalse 
-\contentsline {subsection}{\numberline {5.1.2}Permutations}{32}
+\contentsline {subsection}{\numberline {2.1.3}Tier 3}{13}
 \ifuuthesis@needtocspace \vspace {\uuthesis@chaptersectionspace } \fi \global \uuthesis@needtocspacefalse 
-\contentsline {subsection}{\numberline {5.1.3}Combinations}{33}
-\contentsline {section}{\numberline {5.2}Construction Algorithm}{33}
-\contentsline {subsection}{\numberline {5.2.1}Interval Mapping for an Experimental Design}{35}
-\contentsline {subsection}{\numberline {5.2.2}Mapping Selected Values to Levels}{36}
-\contentsline {section}{\numberline {5.3}Example}{36}
-\contentsline {section}{\numberline {5.4}Handling Constraints}{38}
-\contentsline {section}{\numberline {5.5}Benchmarks}{38}
-\contentsline {chapter}{\numberline {6.}\hyphenpenalty =10000\exhyphenpenalty =10000\relax \linepenalty =0 \uppercase {Future Work}\global \uuthesis@needtocspacetrue }{40}
-\contentsline {chapter}{\numberline {7.}\hyphenpenalty =10000\exhyphenpenalty =10000\relax \linepenalty =0 \uppercase {Conclusion}\global \uuthesis@needtocspacetrue }{42}
-\contentsline {chapter}{REFERENCES}{43}
+\contentsline {subsection}{\numberline {2.1.4}Tier 4}{13}
+\ifuuthesis@needtocspace \vspace {\uuthesis@chaptersectionspace } \fi \global \uuthesis@needtocspacefalse 
+\contentsline {subsection}{\numberline {2.1.5}Tier 5}{13}
+\contentsline {section}{\numberline {2.2}Conclusion}{14}
+\contentsline {chapter}{\numberline {3.}\hyphenpenalty =10000\exhyphenpenalty =10000\relax \linepenalty =0 \uppercase {SAT Sampling}\global \uuthesis@needtocspacetrue }{15}
+\ifuuthesis@needtocspace \vspace {\uuthesis@chaptersectionspace } \fi \global \uuthesis@needtocspacefalse 
+\contentsline {section}{\numberline {3.1}Experiments}{15}
+\contentsline {section}{\numberline {3.2}UniGen}{16}
+\contentsline {subsubsection}{\numberline {3.2.0.1}Model Counting}{17}
+\contentsline {subsubsection}{\numberline {3.2.0.2}XOR Clause Reduction}{18}
+\contentsline {subsection}{\numberline {3.2.1}Benchmarks}{20}
+\contentsline {section}{\numberline {3.3}Other Benchmarks}{20}
+\contentsline {subsection}{\numberline {3.3.1}CryptoMiniSat}{21}
+\contentsline {subsection}{\numberline {3.3.2}KUS}{21}
+\contentsline {subsection}{\numberline {3.3.3}Spur}{22}
+\contentsline {section}{\numberline {3.4}Sample Distribution}{23}
+\contentsline {subsection}{\numberline {3.4.1}UniGen}{24}
+\contentsline {subsection}{\numberline {3.4.2}KUS}{25}
+\contentsline {subsection}{\numberline {3.4.3}Spur}{25}
+\contentsline {subsection}{\numberline {3.4.4}CryptoMiniSat}{25}
+\contentsline {section}{\numberline {3.5}Summary}{26}
+\contentsline {chapter}{\numberline {4.}\hyphenpenalty =10000\exhyphenpenalty =10000\relax \linepenalty =0 \uppercase {Solution Counting}\global \uuthesis@needtocspacetrue }{28}
+\ifuuthesis@needtocspace \vspace {\uuthesis@chaptersectionspace } \fi \global \uuthesis@needtocspacefalse 
+\contentsline {section}{\numberline {4.1}Principles of Counting}{28}
+\contentsline {section}{\numberline {4.2}Partition of an Experimental Design}{29}
+\contentsline {section}{\numberline {4.3}Formula}{30}
+\contentsline {subsection}{\numberline {4.3.1}Tier 1}{31}
+\contentsline {subsection}{\numberline {4.3.2}Tier 2}{31}
+\contentsline {subsection}{\numberline {4.3.3}Tier 3}{31}
+\contentsline {section}{\numberline {4.4}Example}{33}
+\contentsline {section}{\numberline {4.5}Conclusion}{35}
+\contentsline {chapter}{\numberline {5.}\hyphenpenalty =10000\exhyphenpenalty =10000\relax \linepenalty =0 \uppercase {Sequence Construction}\global \uuthesis@needtocspacetrue }{36}
+\ifuuthesis@needtocspace \vspace {\uuthesis@chaptersectionspace } \fi \global \uuthesis@needtocspacefalse 
+\contentsline {section}{\numberline {5.1}Enumerating Permutations and Combinations}{36}
+\ifuuthesis@needtocspace \vspace {\uuthesis@chaptersectionspace } \fi \global \uuthesis@needtocspacefalse 
+\contentsline {subsection}{\numberline {5.1.1}Interval Mapping}{36}
+\ifuuthesis@needtocspace \vspace {\uuthesis@chaptersectionspace } \fi \global \uuthesis@needtocspacefalse 
+\contentsline {subsection}{\numberline {5.1.2}Constructing Permutations}{37}
+\ifuuthesis@needtocspace \vspace {\uuthesis@chaptersectionspace } \fi \global \uuthesis@needtocspacefalse 
+\contentsline {subsection}{\numberline {5.1.3}Combinations}{39}
+\contentsline {section}{\numberline {5.2}Construction Algorithm}{39}
+\contentsline {subsection}{\numberline {5.2.1}Interval Mapping for an Experimental Design}{40}
+\contentsline {subsection}{\numberline {5.2.2}Mapping Selected Values to Sequences}{41}
+\contentsline {section}{\numberline {5.3}Example}{42}
+\contentsline {section}{\numberline {5.4}Handling Constraints}{44}
+\contentsline {section}{\numberline {5.5}Benchmarks}{45}
+\contentsline {chapter}{\numberline {6.}\hyphenpenalty =10000\exhyphenpenalty =10000\relax \linepenalty =0 \uppercase {Future Work}\global \uuthesis@needtocspacetrue }{47}
+\contentsline {chapter}{\numberline {7.}\hyphenpenalty =10000\exhyphenpenalty =10000\relax \linepenalty =0 \uppercase {Conclusion}\global \uuthesis@needtocspacetrue }{49}
+\contentsline {chapter}{REFERENCES}{50}
