@@ -2,17 +2,17 @@
 
 \chapter{A Complexity Spectrum for SweetPea designs}
 
-The complexity of SweetPea designs greatly varies depending on the user's requirements. At one end of the complexity spectrum are simple designs in which there are no structured relationships between trials in a sequence. At the other end are the most complex designs, in which many structured relationships exist between multiple trials in a sequence at varying intervals. This chapter defines a precise gradation of five complexity tiers for experimental designs in order to facilitate later discussion, including evaluating different sampling strategies based on the complexity tiers to which they apply.
+The complexity of SweetPea designs dramatically varies depending on the user's requirements. At one end of the complexity spectrum are simple designs in which there are no structured relationships between trials in a sequence. At the other end are the most intricate designs, in which many structured relationships exist between multiple trials in a sequence at varying intervals. This chapter defines a precise gradation of five complexity tiers for experimental designs in order to facilitate later discussion, including evaluating different sampling strategies based on the complexity tiers to which they apply.
 
-Recall that a complete experimental design is defined by a block, which is composed of a set of factors, a crossing of some subset of the factors, and a set of constraints. This section considers the complexity of a design based solely upon the factors present. Constraints on the overall design are not included in this gradation, as their complexity depends primarily on the complexity of the factors that they constrain.
+Recall that a block defines an experimental design. Blocks have three characteristics: a set of factors, a crossing of some subset of the factors, and a set of constraints. This section considers the complexity of a design based solely upon the first characteristic: the factors present. This gradation ignores constraints on the overall design, as their complexity depends primarily upon the complexity of the factors that they constrain.
 
 \section{Complexity Gradation}
 
-The complexity tier for an arbitrary experiment is determined solely by the types of factors and windows present in the design. We will begin with the simplest designs and finish with the most complex.
+The complexity tier for an arbitrary experiment is determined solely by the types of factors and windows present in the design. We will begin with the most straightforward designs and finish with the most complex.
 
 \subsection{Tier 1}
 
-Tier 1 designs consist of basic factors only. No derived factors are allowed, and all factors in the design are crossed. Every valid trial sequence is a permutation of the crossed factors.
+Tier 1 designs consist of basic factors only. No derived factors are allowed, and the crossing contains all factors in the design. Every valid trial sequence is a permutation of the crossed factors.
 
 \begin{verbatim}
 direction = Factor("Direction", ["North", "South", "East", "West"])
@@ -21,7 +21,7 @@ time_of_day = Factor("Time of Day", ["Sunrise", "High Noon", "Sunset"])
 
 \subsection{Tier 2}
 
-Tier 2 designs still consist exclusively of basic factors, but allow additional basic factors to be present in the design which are uncrossed. Every valid trial sequence is a permutation of the crossed factors paired with random level selections for the uncrossed factors. (The uncrossed factors are unconstrained by the crossing.)
+Tier 2 designs still consist exclusively of basic factors, but allow additional basic factors to be present in the design which are uncrossed. Every valid trial sequence is a permutation of the crossed factors paired with random level selections for the uncrossed factors. (The crossing does not bear any impact on the uncrossed factors.)
 
 \subsection{Tier 3}
 
