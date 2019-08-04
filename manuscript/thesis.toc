@@ -19,7 +19,7 @@
 \contentsline {subsection}{\numberline {1.2.2}Example Encoding}{7}
 \contentsline {subsection}{\numberline {1.2.3}One-to-One Correspondence}{8}
 \contentsline {section}{\numberline {1.3}SweetPea's Contributions}{9}
-\contentsline {section}{\numberline {1.4}Conclusion}{9}
+\contentsline {section}{\numberline {1.4}Conclusion}{10}
 \contentsline {chapter}{\numberline {2.}\hyphenpenalty =10000\exhyphenpenalty =10000\relax \linepenalty =0 \uppercase {A Complexity Spectrum for SweetPea designs}\global \uuthesis@needtocspacetrue }{12}
 \ifuuthesis@needtocspace \vspace {\uuthesis@chaptersectionspace } \fi \global \uuthesis@needtocspacefalse 
 \contentsline {section}{\numberline {2.1}Complexity Gradation}{12}
