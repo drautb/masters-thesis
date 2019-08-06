@@ -39,9 +39,15 @@ congruency = Factor("Congruency", [
 Tier 4 designs relax the limitations on derived factors to allow windows with $width=2$ and $stride=1$ as well. (\texttt{Transition}) Valid trial sequences are still permutations of the crossed factors; however, \texttt{Transition} windows may prohibit some permutations when included in the crossing.
 
 \begin{verbatim}
+def repeat(colors):
+    return colors[0] == colors[1]
+
+def switch(colors):
+    return not repeat(colors
+
 color_repeats = Factor("Color Repeats", [
-  DerivedLevel("Repeat",    Transition(lambda c: c[0] == c[1], [color])),
-  DerivedLevel("No Repeat", Transition(lambda c: c[0] != c[1], [color]))
+  DerivedLevel("Repeat",    Transition(repeat, [color])),
+  DerivedLevel("No Repeat", Transition(switch, [color]))
 ])
 \end{verbatim}
 
@@ -50,9 +56,15 @@ color_repeats = Factor("Color Repeats", [
 Tier 5 designs further relax the limitations on derived factors to allow windows with any width and stride, so long as they do not create constraints that are impossible to satisfy.
 
 \begin{verbatim}
+def repeat(colors):
+    return colors[0] == colors[1]
+
+def switch(colors):
+    return not repeat(colors)
+
 unconnected_color_repeats = Factor("Color Repeats (Unconnected)", [
-  DerivedLevel("Repeat",    Window(lambda c: c[0] == c[1], [color], 2, 2)),
-  DerivedLevel("No Repeat", Window(lambda c: c[0] != c[1], [color], 2, 2))
+  DerivedLevel("Repeat",    Window(repeat, [color], 2, 2)),
+  DerivedLevel("No Repeat", Window(switch, [color], 2, 2))
 ])
 \end{verbatim}
 

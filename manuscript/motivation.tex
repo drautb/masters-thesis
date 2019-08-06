@@ -29,9 +29,15 @@ color = Factor("color", ["red", "blue"])
 The above example is an example of a \textit{basic} factor, meaning that the levels are literal values. SweetPea also provides \textit{derived} factors in which the levels depend upon the level selections for other factors in the design. Derived factors are useful for expressing relationships between different factors which can then be used to add additional structure to the design. As an example, a user may wish to define a "congruency" factor that expresses whether or not two other factors in the design exhibited the same level:
 
 \begin{verbatim}
+def congruent(color, text):
+    return color == text
+
+def incongruent(color, text):
+    return not congruent(color, text)
+
 congruency = Factor("congruency", [
-  DerivedLevel("congruent",   WithinTrial(lambda c, t: c == t, [color, text])),
-  DerivedLevel("incongruent", WithinTrial(lambda c, t: c != t, [color, text]))
+  DerivedLevel("congruent",   WithinTrial(congruent,   [color, text])),
+  DerivedLevel("incongruent", WithinTrial(incongruent, [color, text]))
 ])
 \end{verbatim}
 
@@ -49,9 +55,15 @@ In the previous example, the \texttt{WithinTrial} function constructs what is re
 A second window alias exists, \texttt{Transition}, which has a width of two and a stride of one. As its name implies, this type of window is useful for expressing relationships between consecutive trials in a sequence. For example, a \texttt{Transition} window could be used to define a factor that determines if the level for \texttt{color} is repeated or not between two trials as follows:
 
 \begin{verbatim}
+def repeat(colors):
+    return colors[0] == colors[1]
+
+def switch(colors):
+    return not repeat(colors)
+
 color_repeats = Factor("Color Repetition", [
-  DerivedLevel("Repeat",    Transition(lambda colors: colors[0] == colors[1], [color])),
-  DerivedLevel("No Repeat", Transition(lambda colors: colors[0] != colors[1], [color]))
+  DerivedLevel("Repeat",    Transition(repeat, [color])),
+  DerivedLevel("No Repeat", Transition(switch, [color]))
 ])
 \end{verbatim}
 
