@@ -82,7 +82,7 @@ task-switching-2                      & Timed Out       \\ \hline
 
 In reality, the algorithm implemented by ApproxMC relies on the same family of 3-independent hash functions mentioned previously; therefore it will be subject to the same problem of \texttt{XOR} clause growth, which the next section will explain. A new version of ApproxMC was recently published \cite{approxmc_SM19}; however, it relies on the same family of hash functions, so it is unlikely that it will offer significant improvements. Also, due to the combinatorial nature of the problem, it is unlikely that this would be successful even with more time or processing power.
 
-Although available tools struggle to approximate solution counts for SweetPea designs, this is surmountable by estimating $|R_F|$ ourselves using information from the original problem domain. Because each experimental design constructs a sequence of trials based on combinations of factor levels, we can apply techniques for counting sets from combinatorics to estimate $|R_F|$. This counting strategy will be discussed further later on.
+Although available tools struggle to approximate solution counts for SweetPea designs, this is surmountable by estimating $|R_F|$ ourselves using information from the original problem domain. Because each experimental design constructs a sequence of trials based on combinations of factor levels, we can apply techniques for counting sets from combinatorics to estimate $|R_F|$. This counting strategy will be discussed further in chapter 4.
 
 \subsection{XOR Clause Reduction}
 

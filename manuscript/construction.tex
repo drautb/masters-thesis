@@ -199,7 +199,7 @@ Another perspective is that we are applying the same permutation computed previo
 
 Recall that the complexity gradation did not account for the external constraints that may be part of the design. Such constraints typically enforce some rule regarding repetition of particular characteristics. For example, in the design for Stroop experiments, it is common to apply a constraint that requires that the generated sequence never contain two consecutive congruent trials. Constraints may be applied to the levels of derived factors as well; therefore, the user may impose practically any condition upon the generated sequence.
 
-In the future, the counting and construction algorithms could be enhanced to account for these constraints. Such improvements will be discussed further later on. In the meantime, however, rejection sampling is applied to ensure that the algorithm does not ever return sequences that violate constraints. The generated sample is checked against all repetition constraints in the design to verify that no violations exist. As will be seen in the next section, this performs adequately in practice.
+In the future, the counting and construction algorithms could be enhanced to account for these constraints. Such improvements will be discussed further in chapter 6. In the meantime, however, rejection sampling is applied to ensure that the algorithm does not ever return sequences that violate constraints. The generated sample is checked against all repetition constraints in the design to verify that no violations exist. As will be seen in the next section, this performs adequately in practice.
 
 
 \section{Benchmarks}
