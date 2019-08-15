@@ -25,7 +25,7 @@ Tier 2 designs still consist exclusively of basic factors, but allow additional 
 
 \subsection{Tier 3}
 
-Tier 3 designs add derived factors with windows being limited to those with $width=1$ and $stride=1$. (\texttt{WithinTrial}) Every valid trial sequence is a permutation of the crossed factors paired with random level selections for the uncrossed basic factors. The values for uncrossed derived factors depend solely upon the level selections of basic factors.
+Tier 3 designs add derived factors with windows being limited to those with $width=1$ and $stride=1$. (i.e., \texttt{WithinTrial}) Every valid trial sequence is a permutation of the crossed factors paired with random level selections for the uncrossed basic factors. The values for uncrossed derived factors depend solely upon the level selections of basic factors.
 
 \begin{verbatim}
 congruency = Factor("Congruency", [
@@ -36,7 +36,7 @@ congruency = Factor("Congruency", [
 
 \subsection{Tier 4}
 
-Tier 4 designs relax the limitations on derived factors to allow windows with $width=2$ and $stride=1$ as well. (\texttt{Transition}) Valid trial sequences are still permutations of the crossed factors; however, \texttt{Transition} windows may prohibit some permutations when included in the crossing.
+Tier 4 designs relax the limitations on derived factors to allow windows with $width=2$ and $stride=1$ as well. (i.e., \texttt{Transition}) Valid trial sequences are still permutations of the crossed factors; however, \texttt{Transition} windows may prohibit some permutations when included in the crossing.
 
 \begin{verbatim}
 def repeat(colors):

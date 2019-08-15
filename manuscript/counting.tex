@@ -9,13 +9,13 @@ One may view experimental designs in SweetPea as combinatorics problems, each wi
 
 \section{Principles of Counting}
 
-Before describing a formula for counting solutions to experimental designs, it will be useful to review a few counting principles for future reference, beginning with counting permutations of a set. The standard formula for computing the number of permutations of $r$ items taken from an $n$-element set is:
+Before describing a formula for counting solutions to experimental designs, it will be useful to review a few counting principles for future reference, beginning with counting permutations of a set. As explained by Brualdi \cite{brualdi_introductory_2010}, the standard formula for computing the number of permutations of $r$ items taken from an $n$-element set is:
 
 \[
 P(n,r) = \frac{n!}{(n-r)!}
 \]
 
-See \cite{brualdi_introductory_2010}. When $n =  r$, this becomes simply $n!$.
+When $n =  r$, this becomes simply $n!$.
 
 % Similary, the number of combinations of $r$ items from an $n$-element set is:
 
@@ -137,7 +137,7 @@ Tier 3 designs allow the addition of derived factors. It is now possible that al
 
 Derived factors allow the user to provide an arbitrary predicate for each level in the factor. SweetPea applies these predicates to every combination of levels that could be given as arguments, effectively constructing a truth table, to determine which level to select for each combination of arguments. We define $X_S$ to be the set of sequences representing the crossing of factors in $\overline{C}_{B_S}$, also referred to as the \textit{source crossing}. The next task is to determine, for every element in $X$, which elements of $X_S$ are compatible using the user-defined predicates. Checking compatibility is necessary as some combinations in $X$ may preclude certain combinations in $X_S$.
 
-For every sequence $t \in X$, there is some number of elements in $t$ corresponding to derived factor levels, labeled $d_1, d_2, \cdot\cdot\cdot d_{|C_D|}$ comprising the set $V_t$. Each $d \in V$ is associated with a predicate\footnote{These predicates, also called derivation functions, are expected to be deterministic. If they are non-deterministic, then inconsistent solutions may be produced as the predicates may be applied more than once to the same arguments. SweetPea could minimize this concern by ensuring that each predicate is only applied once to each argument combination and then caching the results.}, $pred(d)$. For every $t \in X$, every $b \in X_S$ is consulted to see if the predicates for all $d \in V_t$ are satisfied\footnote{If $X$ is very large, then testing all combinations could become intractable. However in practice, $X$ is relatively small, typically $|X| < 500$. Additionally, SweetPea's current implementation relies on $X$ being small enough for this to work, as it follows a similar process when generating the SAT encoding for derived factors.}. If any of them is not satisfied, then $b$ is not a compatible choice for $t$ and must be discarded from consideration for $t$. Once this process is complete, a list of subsets of $X_S$ remains, in which the $n^{th}$ subset indicates which elements of $X_S$ are compatible with the $n^{th}$ crossing in $X$.
+For every sequence $t \in X$, there is some number of elements in $t$ corresponding to derived factor levels, labeled $d_1, d_2, \cdot\cdot\cdot d_{|C_D|}$ comprising the set $V_t$. Each $d \in V$ is associated with a predicate,\footnote{These predicates, also called derivation functions, are expected to be deterministic. If they are non-deterministic, then inconsistent solutions may be produced as the predicates may be applied more than once to the same arguments. SweetPea could minimize this concern by ensuring that each predicate is only applied once to each argument combination and then caching the results.} $pred(d)$. For every $t \in X$, every $b \in X_S$ is consulted to see if the predicates for all $d \in V_t$ are satisfied.\footnote{If $X$ is very large, then testing all combinations could become intractable. However in practice, $X$ is relatively small, typically $|X| < 500$. Additionally, SweetPea's current implementation relies on $X$ being small enough for this to work, as it follows a similar process when generating the SAT encoding for derived factors.} If any of them is not satisfied, then $b$ is not a compatible choice for $t$ and must be discarded from consideration for $t$. Once this process is complete, a list of subsets of $X_S$ remains, in which the $n^{th}$ subset indicates which elements of $X_S$ are compatible with the $n^{th}$ crossing in $X$.
 
 More formally, let $S$ be a list of items $J_1, J_2, \cdot\cdot\cdot J_{|X|}$. The following statements are true:
 
@@ -154,7 +154,7 @@ s = l! \cdot \prod_{i=1}^{|\overline{C}_{B_I}|} |f_i|^l \cdot \prod_{k=1}^{|S|} 
 
 The total number of solutions $s$ for a given experimental design is the product of the number of permutations of the crossing, the number of combinations of each independent factor, and the number of acceptable combinations of all source factors.
 
-It is possible for the user to specify a crossing that is not satisfiable. Referring back to the Stroop example, the user may include all three factors, \texttt{color}, \texttt{text}, and \texttt{congruent}, in the crossing. This is unsatisfiable because some level combinations violate the rules of the derived factor. For example, \texttt{color=red}, \texttt{text=blue}, and \texttt{congruent=yes} is invalid because \texttt{red} and \texttt{blue} are not congruent according to the predicates for \texttt{congruent}. If such a crossing is specified, this will correctly identify the number of potential solutions as zero.
+It is possible for the user to specify a crossing that is not satisfiable. Referring back to the Stroop example, the user may include all three factors, \texttt{color}, \texttt{text}, and \texttt{congruent}, in the crossing. This is unsatisfiable because some level combinations violate the rules of the derived factor. For example, \texttt{color=red}, \texttt{text=blue}, and \texttt{congruent=yes} is invalid because \texttt{red} and \texttt{blue} are not congruent according to the predicates for \texttt{congruent}. If such a crossing is specified, the formula for $s$ will correctly identify the number of potential solutions as zero.
 
 \section{Example}
 
@@ -223,7 +223,7 @@ With $S$ defined, we may now compute the third term of the formula:
     \prod_{k=1}^{|S|} |J_k| = 1 \cdot 2 \cdot 1 \cdot 2 \cdot 1 \cdot 2 = 8
 \]
 
-This yields the final solution count of $s = 720 \cdot 8 = 5,760$. Once may confirm this solution by generating the corresponding SAT encoding for this design and applying a model counter to the generated CNF.
+This yields the final solution count of $s = 720 \cdot 8 = 5,760$. One may confirm this solution by generating the corresponding SAT encoding for this design and applying a model counter to the generated CNF.
 
 \section{Conclusion}
 

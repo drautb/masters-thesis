@@ -2,7 +2,7 @@
 
 \chapter{SAT Sampling}
 
-As was briefly mentioned previously, the current implementation is unable to generate samples for realistic experiment designs without sacrificing uniformity guarantees. Although recent advancements in SAT sampling appeared promising, they only apply under specific conditions. This chapter explains in greater detail why the current encoding for arbitrary SweetPea designs does not preserve these conditions. It also shows how these conditions impose an upper-bound on the solution space, which realistic designs exceed. We also provide benchmarks empirically substantiating this claim and explain the practical limitations of the current approach. To do so, we examine UniGen's contributions and their relationship to the SweetPea encoding. Lastly, it presents benchmarks for generating trial sequences using a few other SAT samplers, further showing that relying exclusively on a SAT sampler is not a viable strategy for SweetPea.
+As was briefly mentioned previously, the current implementation is unable to generate samples for realistic experiment designs without sacrificing uniformity guarantees. Although recent advancements in SAT sampling appeared promising, they only apply under specific conditions. This chapter explains in greater detail why the current encoding for arbitrary SweetPea designs does not preserve these conditions. It also shows how these conditions impose an upper-bound on the solution space, which realistic designs exceed. We also provide benchmarks empirically substantiating this claim and explain the practical limitations of the current approach. To do so, we examine UniGen's contributions and their relationship to the SweetPea encoding. Lastly, this chapter presents benchmarks for generating trial sequences using a few other SAT samplers, further showing that relying exclusively on a SAT sampler is not a viable strategy for SweetPea.
 
 
 \section{Experiments}
@@ -38,7 +38,7 @@ All benchmarks were run on a PC running Ubuntu 18.04.2 LTS with 16GB of memory a
 
 UniGen \cite{chakraborty2013scalable,chakraborty_balancing_2014} is a recently developed SAT \textit{sampler}. Given a boolean formula in conjunctive normal form (CNF), UniGen can produce nearly uniformly sampled satisfying assignments. SweetPea relies directly on UniGen for uniformly sampling trial sequences for a given design. As explained previously, SweetPea builds the CNF such that there is a one-to-one relationship between solutions to the formula and unique trial sequences that conform to the design. UniGen employs a hashing technique that partitions the solution space into bins that are small enough to allow random sampling of solutions from each bin. UniGen has worked well for some designs, but its capacities are quickly overwhelmed by even moderately sized designs.
 
-UniGen relies on a family of 3-independent hash functions, known to have strong uniformity guarantees \cite{gomes_near-uniform_2007}, to partition the solution space of a formula into bins. These bins are small enough that UniGen may then sample them directly. However, there are two problems with this approach for larger formulas:
+UniGen relies on a family of 3-independent hash functions, known to have strong uniformity guarantees \cite{gomes_near-uniform_2007}, to partition the solution space of a formula into bins. However, there are two problems with this approach for larger formulas:
 
 \begin{enumerate}
 \item It requires a parameter, denoted $m$, to influence the size of the bins. Choosing an appropriate value for $m$ is non-trivial. Previous samplers have been forced to use trial and error to find a value that produced bins of the desired size.
@@ -53,7 +53,7 @@ UniGen's main contributions were techniques for mitigating both of these obstacl
 
 % Let $F$ denote a boolean formula in CNF, and let $R_F$ denote the set of satisfying assignments, or witnesses, for $F$. UniGen, as well as several other samplers, is based on a strategy for generating a partition of $R_F$ using a family of 3-independent hash functions which provide strong uniformity guarantees \cite{gomes_near-uniform_2007}. However, there are two obstacles to using this family of functions: First, it requires a parameter $m$, which influences the size of the subsets of the partition of $R_F$. Choosing an appropriate value for $m$ is non-trivial. Second, these functions rely heavily on the \texttt{XOR} logical operation. Unfortunately, as stated in \cite{chakraborty_balancing_2014}, as the number of variables per \texttt{XOR} clause grows, the difficulty of generating solutions to the formula increases significantly. \cite{Gomes:2007:SXM:1768142.1768155} At the core of UniGen's contributions were techniques for mitigating both of these problems.
 
-\subsubsection{Model Counting}
+\subsection{Model Counting}
 
 The first problem is choosing an appropriate value for $m$. Let $F$ denote a boolean formula in CNF, and let $R_F$ denote the set of satisfying assignments, or witnesses, for $F$. The best value for $m$ depends on $|R_F|$; however, in practice $|R_F|$ is not known upfront. UniGen uses an approximate model counter, ApproxMC \cite{DBLP:journals/corr/ChakrabortyMV13}, to estimate $|R_F|$. With this estimate, a narrow range of values for $m$ can be generated and tested for fitness. Starting with a narrow range of possibilities significantly reduces the effort required to find the best value for $m$, at the cost of needing to estimate $|R_F|$.
 
@@ -84,9 +84,9 @@ In reality, the algorithm implemented by ApproxMC relies on the same family of 3
 
 Although available tools struggle to approximate solution counts for SweetPea designs, this is surmountable by estimating $|R_F|$ ourselves using information from the original problem domain. Because each experimental design constructs a sequence of trials based on combinations of factor levels, we can apply techniques for counting sets from combinatorics to estimate $|R_F|$. This counting strategy will be discussed further later on.
 
-\subsubsection{XOR Clause Reduction}
+\subsection{XOR Clause Reduction}
 
-The second problem requires reducing the length of \texttt{XOR} clauses. Let $X$ be the set of variables in $F$. Using terminology from \cite{chakraborty_balancing_2014}, $X$ is called the \textit{support} of $F$. They observed that there is often a subset $S \subseteq X$, referred to as an \textit{independent support} of $X$, which fully determines all variable assignments for any satisfying assignment. That is, for all satisfying assignments of $F$, there are no two assignments whose values differ only in the assignments of variables $\overline{S}$. Figure \ref{fig:ind_support} visually represents this concept.
+The second problem requires reducing the length of \texttt{XOR} clauses. Let $X$ be the set of variables in $F$. Using terminology from Chakraborty et al. \cite{chakraborty_balancing_2014}, $X$ is called the \textit{support} of $F$. They observed that there is often a subset $S \subseteq X$, referred to as an \textit{independent support} of $X$, which fully determines all variable assignments for any satisfying assignment. That is, for all satisfying assignments of $F$, there are no two assignments whose values differ only in the assignments of variables $\overline{S}$. Figure \ref{fig:ind_support} visually represents this concept.
 
 \begin{figure}[htb]
 \centering

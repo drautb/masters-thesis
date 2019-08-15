@@ -77,7 +77,7 @@ The crossing is the most authoritative constraint in the entire design. Every le
 
 \subsection{Constraints}
 
-Lastly, constraints allow the designer to require or prohibit particular patterns in the final generated trial sequence. There are only two such constraints available today: \texttt{AtMostKInARow} and \texttt{ExactlyKInARow}. Each of these allows the designer to enforce that there are no more than, or exactly, $k$ (user-specified) repetitions of a specific factor level in any generated sequence. These constraints are useful for ensuring some level of variety, or lack thereof, between trials in the sequence.
+Lastly, constraints allow the designer to require or prohibit particular patterns in the final generated trial sequence. There are only two such constraints available today: \texttt{AtMostKInARow} and \texttt{ExactlyKInARow}. Each of these allows the designer to enforce that there are no more than, or exactly, $k$ (user-specified) repetitions of a specific factor level in any generated sequence. These constraints are useful for ensuring some level of variety, or lack thereof, between trials in the sequence. While these constraints appear simple initially, they become quite powerful when applied to derived factors.
 
 \subsection{Complete Example}
 
@@ -99,7 +99,7 @@ block = FullyCrossBlock([color, text, congruent],
                         constraints)
 \end{verbatim}
 
-\texttt{color} and \texttt{text} represent the possibilities for the font color and the printed text in a trial. A \texttt{congruent} factor is also defined, to define a constraint that will ensure the subject never sees two consecutive trials in which the ink color and printed text matched. Lastly, the final block is constructed using just \texttt{color} and \texttt{text} to form the crossing. Table \ref{tab:example_sequence} shows one possible trial sequence that conforms to this design.
+\texttt{color} and \texttt{text} represent the possibilities for the font color and the printed text in a trial. A \texttt{congruent} factor is also defined, to define a constraint that will ensure the subject never sees two consecutive trials in which the ink color and printed text matched. (This constraint is not inherently part of the original Stroop experiment, but is used here for purposes of demonstration.) Lastly, the final block is constructed using just \texttt{color} and \texttt{text} to form the crossing. Table \ref{tab:example_sequence} shows one possible trial sequence that conforms to this design.
 
 \begin{table}[htb]
   \centering
@@ -156,7 +156,7 @@ Continuing with the example design for the Stroop test introduced previously, we
 \label{tab:encoding_diagram}
 \end{table}
 
-In this encoding, if variable 68 is true, that corresponds to the level \texttt{red} being selected for the factor \texttt{text} in trial number 9. The encoding will also require variables 69 and 70 to be false in this case, as well as require variable 71 to be equivalent to 65. Once a solution is found, it is then decoded back into the original language of the design as a trial sequence. For more details concerning the current encoding scheme, refer to the original paper.
+In this encoding, if variable 68 is true, that corresponds to the level \texttt{red} being selected for the factor \texttt{text} in trial number 9. The encoding will also require variables 69 and 70 to be false in this case, as well as require variable 71 to be equivalent to 65. Once a solution is found, it is then decoded back into the original language of the design as a trial sequence. For more details concerning the current encoding scheme, refer to the original paper \cite{annie}.
 
 Once SweetPea generates the CNF encoding for a design, it applies a SAT sampler to the formula to generate some number of solutions. SAT samplers are similar to solvers, in that they produce satisfying assignments to a boolean formula; however, they guarantee some level of uniformity in the distribution of generated samples. Historically, SAT samplers could only provide strong uniformity guarantees for small formulas, but recent research shows some potential for improving the scalability of current sampling algorithms. SweetPea targets the SAT sampler \textit{UniGen}. SAT sampling will be discussed in further detail later on.
 
@@ -183,7 +183,7 @@ SweetPea was created to solve two specific problems facing researchers today:
 SweetPea aims to solve both of these problems by providing a standard language for expressing experimental designs as well as a synthesis engine that generates a uniform distribution of random samples.
 
 
-\section{Conclusion}
+\section{SweetPea's Future}
 
 SweetPea sounds panacean, but it has yet to realize its objectives fully. The language is still under revision, but SweetPea shows excellent promise for fulfilling the first objective. On the other hand, uniform sampling of trial sequences has proven significantly more challenging. We hoped that leveraging recent developments in the field of SAT-sampling would allow us to solve this problem. However, the applicability of SAT samplers is fundamentally limited to formulas with solution counts below a particular threshold. Realistic designs routinely exceed this threshold.
 
