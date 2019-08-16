@@ -2,7 +2,7 @@
 
 \chapter{Solution Counting}
 
-Today, SweetPea offloads the entire sampling process to an external tool. While an attractive option from an implementation standpoint, this strategy does not scale to the degree needed by SweetPea. As demonstrated previously, the solution spaces from which SweetPea is trying to sample are beyond the capacity of any existing tools. One of the shortcomings of this approach is that external tools cannot exploit domain knowledge of the problem to guide their decisions.
+Today, SweetPea offloads the entire sampling process to an external tool. While an attractive option from an implementation standpoint, this strategy does not scale to the degree needed by SweetPea. As demonstrated in Chapters 1 and 3, the solution spaces from which SweetPea is trying to sample are beyond the capacity of any existing tools. One of the shortcomings of this approach is that external tools cannot exploit domain knowledge of the problem to guide their decisions.
 
 One may view experimental designs in SweetPea as combinatorics problems, each with a countable set of solutions. If a formula for counting the solutions to an experimental design could be derived, then it may also be possible to discover a bijection between solutions to the design and the natural numbers. If a corresponding natural number could uniquely identify every possible solution, then we could guarantee uniformity by randomly sampling natural numbers from the uniform distribution. As a first foray into solution counting, this chapter presents such a formula for tier one, two, and three designs. This exploration will also defer treatment of the set of external design constraints.
 
@@ -193,7 +193,7 @@ For the third and final term, we need to first determine $X_S$, the cartesian pr
 X_S = \{red, green, blue\}
 \]
 
-At this point, each element of the product of $X$ and $X_S$ must be checked for validity under the derived factor definitions in the design to determine the subsets of $X_S$ that are valid for each element in $X$. In terms of this example, which level selections in $X_S$ do \textit{not} violate the definition of \texttt{congruent?} when paired with each level selection combination in $X$? These subsets comprise $S$ as defined previously. Table \ref{tab:example_s} gives a visual representation of this process.
+At this point, each element of the product of $X$ and $X_S$ must be checked for validity under the derived factor definitions in the design to determine the subsets of $X_S$ that are valid for each element in $X$. In terms of this example, which level selections in $X_S$ do \textit{not} violate the definition of \texttt{congruent?} when paired with each level selection combination in $X$? These subsets comprise $S$ as defined in 4.3.3. Table \ref{tab:example_s} gives a visual representation of this process.
 
 \begin{table}[htb]
   \centering

@@ -2,7 +2,7 @@
 
 \chapter{SAT Sampling}
 
-As was briefly mentioned previously, the current implementation is unable to generate samples for realistic experiment designs without sacrificing uniformity guarantees. Although recent advancements in SAT sampling appeared promising, they only apply under specific conditions. This chapter explains in greater detail why the current encoding for arbitrary SweetPea designs does not preserve these conditions. It also shows how these conditions impose an upper-bound on the solution space, which realistic designs exceed. We also provide benchmarks empirically substantiating this claim and explain the practical limitations of the current approach. To do so, we examine UniGen's contributions and their relationship to the SweetPea encoding. Lastly, this chapter presents benchmarks for generating trial sequences using a few other SAT samplers, further showing that relying exclusively on a SAT sampler is not a viable strategy for SweetPea.
+As was briefly mentioned in Chapter 1, the current implementation is unable to generate samples for realistic experiment designs without sacrificing uniformity guarantees. Although recent advancements in SAT sampling appeared promising, they only apply under specific conditions. This chapter explains in greater detail why the current encoding for arbitrary SweetPea designs does not preserve these conditions. It also shows how these conditions impose an upper-bound on the solution space, which realistic designs exceed. We also provide benchmarks empirically substantiating this claim and explain the practical limitations of the current approach. To do so, we examine UniGen's contributions and their relationship to the SweetPea encoding. Lastly, this chapter presents benchmarks for generating trial sequences using a few other SAT samplers, further showing that relying exclusively on a SAT sampler is not a viable strategy for SweetPea.
 
 
 \section{Experiments}
@@ -36,7 +36,7 @@ All benchmarks were run on a PC running Ubuntu 18.04.2 LTS with 16GB of memory a
 
 \section{UniGen}
 
-UniGen \cite{chakraborty2013scalable,chakraborty_balancing_2014} is a recently developed SAT \textit{sampler}. Given a boolean formula in conjunctive normal form (CNF), UniGen can produce nearly uniformly sampled satisfying assignments. SweetPea relies directly on UniGen for uniformly sampling trial sequences for a given design. As explained previously, SweetPea builds the CNF such that there is a one-to-one relationship between solutions to the formula and unique trial sequences that conform to the design. UniGen employs a hashing technique that partitions the solution space into bins that are small enough to allow random sampling of solutions from each bin. UniGen has worked well for some designs, but its capacities are quickly overwhelmed by even moderately sized designs.
+UniGen \cite{chakraborty2013scalable,chakraborty_balancing_2014} is a recently developed SAT \textit{sampler}. Given a boolean formula in conjunctive normal form (CNF), UniGen can produce nearly uniformly sampled satisfying assignments. SweetPea relies directly on UniGen for uniformly sampling trial sequences for a given design. As explained in Chapter 1, SweetPea builds the CNF such that there is a one-to-one relationship between solutions to the formula and unique trial sequences that conform to the design. UniGen employs a hashing technique that partitions the solution space into bins that are small enough to allow random sampling of solutions from each bin. UniGen has worked well for some designs, but its capacities are quickly overwhelmed by even moderately sized designs.
 
 UniGen relies on a family of 3-independent hash functions, known to have strong uniformity guarantees \cite{gomes_near-uniform_2007}, to partition the solution space of a formula into bins. However, there are two problems with this approach for larger formulas:
 
@@ -80,9 +80,9 @@ task-switching-2                      & Timed Out       \\ \hline
 \label{tab:benchmark_experiments_approxmc}%
 \end{table}
 
-In reality, the algorithm implemented by ApproxMC relies on the same family of 3-independent hash functions mentioned previously; therefore it will be subject to the same problem of \texttt{XOR} clause growth, which the next section will explain. A new version of ApproxMC was recently published \cite{approxmc_SM19}; however, it relies on the same family of hash functions, so it is unlikely that it will offer significant improvements. Also, due to the combinatorial nature of the problem, it is unlikely that this would be successful even with more time or processing power.
+In reality, the algorithm implemented by ApproxMC relies on the same family of 3-independent hash functions used by UniGen itself; therefore it will be subject to the same problem of \texttt{XOR} clause growth, which the next section will explain. A new version of ApproxMC was recently published \cite{approxmc_SM19}; however, it relies on the same family of hash functions, so it is unlikely that it will offer significant improvements. Also, due to the combinatorial nature of the problem, it is unlikely that this would be successful even with more time or processing power.
 
-Although available tools struggle to approximate solution counts for SweetPea designs, this is surmountable by estimating $|R_F|$ ourselves using information from the original problem domain. Because each experimental design constructs a sequence of trials based on combinations of factor levels, we can apply techniques for counting sets from combinatorics to estimate $|R_F|$. This counting strategy will be discussed further in chapter 4.
+Although available tools struggle to approximate solution counts for SweetPea designs, this is surmountable by estimating $|R_F|$ ourselves using information from the original problem domain. Because each experimental design constructs a sequence of trials based on combinations of factor levels, we can apply techniques for counting sets from combinatorics to estimate $|R_F|$. This counting strategy will be discussed further in Chapter 4.
 
 \subsection{XOR Clause Reduction}
 
@@ -155,7 +155,7 @@ task-switching-2                      & Timed Out       \\ \hline
 
 \section{Other Benchmarks}
 
-As mentioned previously, we tested several other SAT samplers. This section presents the results of testing multiple SAT solving and sampling tools, as well as additional information on the implementation strategy of each tool. All sampling benchmarks were configured to generate ten samples at a time
+As mentioned at the beginning of this chapter, we tested several other SAT samplers. This section presents the results of testing multiple SAT solving and sampling tools, as well as additional information on the implementation strategy of each tool. All sampling benchmarks were configured to generate ten samples at a time
 
 \subsection{CryptoMiniSat}
 
