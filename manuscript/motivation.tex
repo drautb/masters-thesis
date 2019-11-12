@@ -45,7 +45,7 @@ If the \texttt{congruency} factor were set to the level "congruent" for a given 
 
 In the previous example, the \texttt{WithinTrial} function constructs what is referred to as the \texttt{window} for the level. Consider a sequence of trials; one may wish to define a derived factor that identifies a characteristic of the level selections across multiple trials. A window is the language construct that specifies which trials the factor will consider. Windows have four characteristics: A derivation function, a list of factors (arguments to the derivation function), a \textit{width} and a \textit{stride}. The width of a window specifies how many subsequent trials are considered for each occurrence of the derived factor, while the stride specifies the offset between subsequent occurrences. The \texttt{WithinTrial} window is an alias for a general window with a width and stride of one, meaning that it only considers levels within the current trial, and the derived factor applies to each trial in the sequence. Figure \ref{fig:windows} presents a visual representation of this concept.
 
-\begin{figure}[htb]
+\begin{figure}[b]
 \centering
 \centerline{\includegraphics[origin=c,width=8cm]{../figures/windows.png}}
 \caption{Window Properties}
@@ -101,7 +101,7 @@ block = FullyCrossBlock([color, text, congruent],
 
 \texttt{color} and \texttt{text} represent the possibilities for the font color and the printed text in a trial. A \texttt{congruent} factor is also defined, to define a constraint that will ensure the subject never sees two consecutive trials in which the ink color and printed text matched. (This constraint is not inherently part of the original Stroop experiment, but is used here for purposes of demonstration.) Lastly, the final block is constructed using just \texttt{color} and \texttt{text} to form the crossing. Table \ref{tab:example_sequence} shows one possible trial sequence that conforms to this design.
 
-\begin{table}[htb]
+\begin{table}[b]
   \centering
   \caption{Example Trial Sequence}
 \begin{tabular}{cccc}
