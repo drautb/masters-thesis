@@ -25,7 +25,7 @@ j = 1    &&  R_3 = 1 \bmod 2 = 1   &&                                           
 
 Thus the set of selected values from each interval is $R = \{0, 1, 1\}$. Figure \ref{fig:interval_breakdown} demonstrates this visually.
 
-\begin{figure}[htb]
+\begin{figure}[b]
 \centering
 \centerline{\includegraphics[origin=c,width=12cm]{../figures/interval-breakdown-final.png}}
 \caption{Decomposing a Number into Constituent Ranges}
@@ -44,7 +44,7 @@ For example, because the elements $\{1, 2, 3, 4, 5\}$ are in order, the correspo
 
 An inversion sequence can be used to generate the associated permutation by using the inversions to select where to place each element. Given an inversion sequence $a_1, a_2, ... a_n$, begin with $n$ empty locations. Beginning with $a_1$, skip $a_i$ empty locations before inserting the $i^{th}$ element of $S$. Figure \ref{fig:inversion_sequence} demonstrates this algorithm in the previous example.
 
-\begin{figure}[htb]
+\begin{figure}[b]
 \centering
 \centerline{\includegraphics[origin=c,width=12cm]{../figures/inversion-sequence.png}}
 \caption{Construction of a Permutation from its Inversion Sequence}
@@ -96,7 +96,7 @@ Once a sequence number $i$ has been selected (Step 2), and $U$ has been construc
 
 Once interval mapping has produced values for each interval, SweetPea must convert the value into its associated permutation or combination in the original design. The first value, $U_0$, identifies a particular permutation of the crossing, the next $l$ values, $U_1$ to $U_l$, identify a particular source combination for the $l^{th}$ trial in the sequence,\footnote{Ordering is important here due to the association between valid source combinations and specific sequences in the crossing. The same permutation that scrambles the crossing must also be applied to the set of source combinations to preserve the integrity of the association.} and the remaining values beginning with $U_{l+1}$ identify particular $l$-combinations to be used for each independent basic factor in the sequence. Each of these three types of values identifies a permutation or combination that spans a different dimension of the final sequence. Figure \ref{fig:sequence_dimensions} gives a visual representation to assist the reader.
 
-\begin{figure}[htb]
+\begin{figure}[t]
 \centering
 \centerline{\includegraphics[origin=c,width=12cm]{../figures/sequence-dimensions.png}}
 \caption{Dimensionality of Interval Values}
@@ -109,8 +109,8 @@ The algorithm converts the selected values for independent basic factors ($U_{l+
 
 Lastly, the algorithm must convert the selected values for source combinations ($U_1$ to $U_l$). These are more complex than the previous conversions because a set of valid source combinations is associated with an individual trial in the sequence. It would be incorrect to select a source combination from the $n^{th}$ set of valid source combinations for the $n^{th}$ trial, because the permutation may have shifted the position of the original $n^{th}$ trial in the sequence. Therefore care must be taken to preserve this association. The algorithm preserves this association by using the original trial index when selecting the set of valid source combinations. Figure \ref{fig:source_combinations} outlines the entire mapping process.
 
-% TODO: Make this a real diagram
-\begin{figure}[htb]
+
+\begin{figure}[t]
 \centering
 \centerline{\includegraphics[origin=c,width=12cm]{../figures/source-combination-mapping.png}}
 \caption{Selecting Valid Source Combinations}
@@ -153,9 +153,9 @@ The first value of the permutation is $3$, which corresponds to the source combi
   \{blue, blue, red, green, red, blue\}
 \]
 
-Another perspective is that we are applying the same permutation computed previously to the list of level selections and the list of source combinations, before doing the final lookup. Combining all level selections yields a complete trial sequence:
+Another perspective is that we are applying the same permutation computed previously to the list of level selections and the list of source combinations, before doing the final lookup. Combining all level selections yields a complete trial sequence which is shown in Table \ref{tab:example_trial_sequence}.
 
-\begin{table}[htb]
+\begin{table}[b]
   \centering
   \caption{The $2590^{th}$ Trial Sequence}
 \begin{tabular}{rccc}
@@ -209,7 +209,7 @@ Of the ten benchmarks designs that were introduced in Chapter 3, four can be cla
 % Extra constraints:
 % constraints = [AtMostKInARow(1, ("congruent?", "yes")), AtMostKInARow(3, color), AtMostKInARow(3, text)]
 
-\begin{table}[htb]
+\begin{table}[b]
   \centering
   \caption{Benchmark Experiments for Sequence Construction}
 \begin{tabular}{|c|c|c|c|c|}
@@ -228,7 +228,7 @@ stroop-20-extra-constraints           & 400             & $\approx 2^{2886}$    
 
 Even for huge designs, this approach constructs a single random sample exceptionally quickly.
 
-\begin{table}[htb]
+\begin{table}[t]
   \centering
   \caption{Sampling Metrics}
 \begin{tabular}{|c|c|c|c|c|}
