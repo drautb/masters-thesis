@@ -134,7 +134,7 @@ Tools for interacting with SAT formulas typically require the input formula to b
 
 \subsection{Example Encoding}
 
-Continuing with the example design for the Stroop test introduced in 1.1.4, we will see how SweetPea generates the SAT encoding for this design. The sequence length, as determined by the crossing, is $9$. The current encoding scheme will allocate $9 \cdot 8 = 72$ variables to represent every level of every factor in each trial. Additional variables will be allocated to enforce other constraints, such as ensuring that each factor takes only one level in each trial, and requiring that each combination in the crossing be present in the sequence. The first step of the encoding can be visualized easily, as demonstrated in Table \ref{tab:encoding_diagram}.
+Continuing with the example design for the Stroop test introduced in Section 1.1.4, we will see how SweetPea generates the SAT encoding for this design. The sequence length, as determined by the crossing, is $9$. The current encoding scheme will allocate $9 \cdot 8 = 72$ variables to represent every level of every factor in each trial. Additional variables will be allocated to enforce other constraints, such as ensuring that each factor takes only one level in each trial, and requiring that each combination in the crossing be present in the sequence. The first step of the encoding can be visualized easily, as demonstrated in Table \ref{tab:encoding_diagram}.
 
 \begin{table}[htb]
   \centering
