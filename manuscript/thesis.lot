@@ -7,7 +7,7 @@
 \contentsline {table}{\numberline {3.4}{\ignorespaces Time to Generate 10 Samples with UniGen}}{20}
 \contentsline {table}{\numberline {3.5}{\ignorespaces Time to Solve for 1 Solution with CryptoMiniSat}}{21}
 \contentsline {table}{\numberline {3.6}{\ignorespaces d-DNNF Compilation for Sampling with KUS}}{22}
-\contentsline {table}{\numberline {3.7}{\ignorespaces Time to Generate 10 Samples with KUS}}{23}
+\contentsline {table}{\numberline {3.7}{\ignorespaces Time to Generate 10 Samples with KUS}}{22}
 \contentsline {table}{\numberline {3.8}{\ignorespaces Time to Generate 10 Samples with Spur}}{23}
 \contentsline {table}{\numberline {4.1}{\ignorespaces Expressing Level Combinations as Sequences}}{31}
 \contentsline {table}{\numberline {4.2}{\ignorespaces Computing $S$ for Solution Counting}}{34}

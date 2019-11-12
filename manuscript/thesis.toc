@@ -42,12 +42,12 @@
 \contentsline {subsection}{\numberline {3.2.2}XOR Clause Reduction}{18}
 \contentsline {subsection}{\numberline {3.2.3}Benchmarks}{20}
 \contentsline {section}{\numberline {3.3}Other Benchmarks}{20}
-\contentsline {subsection}{\numberline {3.3.1}CryptoMiniSat}{21}
+\contentsline {subsection}{\numberline {3.3.1}CryptoMiniSat}{20}
 \contentsline {subsection}{\numberline {3.3.2}KUS}{21}
-\contentsline {subsection}{\numberline {3.3.3}Spur}{22}
+\contentsline {subsection}{\numberline {3.3.3}Spur}{23}
 \contentsline {section}{\numberline {3.4}Sample Distribution}{23}
 \contentsline {subsection}{\numberline {3.4.1}UniGen}{24}
-\contentsline {subsection}{\numberline {3.4.2}KUS}{25}
+\contentsline {subsection}{\numberline {3.4.2}KUS}{24}
 \contentsline {subsection}{\numberline {3.4.3}Spur}{25}
 \contentsline {subsection}{\numberline {3.4.4}CryptoMiniSat}{25}
 \contentsline {section}{\numberline {3.5}Summary}{26}
