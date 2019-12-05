@@ -1,7 +1,7 @@
 %%% -*-LaTeX-*-
 \chapter{Motivation}
 
-\textbf{SweetPea} \cite{annie} is a new language that allows researchers to express experimental designs in their research declaratively. Experimental designs typically consist of several different variables combined in different ways to generate a sequence of trials. Researchers present these trials as stimuli to a subject to observe characteristics of the subject's responses. The nature of these designs is combinatorial. Even for designs with a modest number of variables and trials, the number of possible combinations can be staggering. This complexity has plagued researchers for many years. SweetPea was created to alleviate some of this pain; although so far, it has only partially succeeded. In this chapter, we will first present an overview of the SweetPea language, followed by a brief description of its implementation. Lastly, we identify the specific contributions that SweetPea makes as well as aspects in which it still falls short.
+\textbf{SweetPea} \cite{annie} is a new language that allows researchers to express experimental designs in their research declaratively. Experimental designs typically consist of several different variables combined in different ways to generate a sequence of trials. Researchers present these trials as stimuli to a subject to observe characteristics of the subject's responses. The nature of these designs is combinatorial. Even for designs with a modest number of variables and trials, the number of possible combinations can be staggering. This complexity has plagued researchers for many years. SweetPea was created to alleviate some of this pain, although so far, it has only partially succeeded. In this chapter, we will first present an overview of the SweetPea language, followed by a brief description of its implementation. Lastly, we identify the specific contributions that SweetPea makes as well as aspects in which it still falls short.
 
 
 \section{SweetPea Overview}
@@ -13,7 +13,7 @@ At present, only a single block type is provided by SweetPea, which is the \text
 \begin{enumerate}
 \item A set of \textit{factors}.
 \item A subset of the factors to combine to form the \textit{crossing}.
-\item A set of \textit{constraints}
+\item A set of \textit{constraints}.
 \end{enumerate}
 
 These three components provide the structure and rules that govern the construction of trial sequences.
@@ -43,7 +43,7 @@ congruency = Factor("congruency", [
 
 If the \texttt{congruency} factor were set to the level "congruent" for a given trial, that would indicate that the levels selected for the \textit{color} and \textit{text} factors were equivalent. Derived factors accept arbitrary python functions to express the relationship, though there are additional requirements regarding how the functions partition the space.
 
-In the previous example, the \texttt{WithinTrial} function constructs what is referred to as the \texttt{window} for the level. Consider a sequence of trials; one may wish to define a derived factor that identifies a characteristic of the level selections across multiple trials. A window is the language construct that specifies which trials the factor will consider. Windows have four characteristics: A derivation function, a list of factors (arguments to the derivation function), a \textit{width} and a \textit{stride}. The width of a window specifies how many subsequent trials are considered for each occurrence of the derived factor, while the stride specifies the offset between subsequent occurrences. The \texttt{WithinTrial} window is an alias for a general window with a width and stride of one, meaning that it only considers levels within the current trial, and the derived factor applies to each trial in the sequence. Figure \ref{fig:windows} presents a visual representation of this concept.
+In the previous example, the \texttt{WithinTrial} function constructs what is referred to as the \texttt{window} for the level. Consider a sequence of trials; one may wish to define a derived factor that identifies a characteristic of the level selections across multiple trials. A window is the language construct that specifies which trials the factor will consider. Windows have four characteristics: a derivation function, a list of factors (arguments to the derivation function), a \textit{width}, and a \textit{stride}. The width of a window specifies how many subsequent trials are considered for each occurrence of the derived factor, while the stride specifies the offset between subsequent occurrences. The \texttt{WithinTrial} window is an alias for a general window with a width and stride of one, meaning that it only considers levels within the current trial, and the derived factor applies to each trial in the sequence. Figure \ref{fig:windows} presents a visual representation of this concept.
 
 \begin{figure}[b]
 \centering
@@ -67,7 +67,7 @@ color_repeats = Factor("Color Repetition", [
 ])
 \end{verbatim}
 
-Observe that derived factors with this type of window never apply to the first trial in a sequence, as no prior trial exists with which to compare the current trial. Windows with non-one width and stride will not have a value for every trial in the sequence. Generally speaking, a window with width $w$ and stride $s$ will first apply to trial $w$, and to every $s^{th}$ trial after that. Although the language does allow for windows with arbitrary widths and strides, the computational complexity of computing the levels grows exponentially as the width increases. Therefore there are practical constraints on the usable size of a window.
+Observe that derived factors with this type of window never apply to the first trial in a sequence, as no prior trial exists with which to compare the current trial. Windows with non-one width and stride will not have a value for every trial in the sequence. Generally speaking, a window with width $w$ and stride $s$ will first apply to trial $w$, and to every $s^{th}$ trial after that. Although the language does allow for windows with arbitrary widths and strides, the computational complexity of computing the levels grows exponentially as the width increases. Therefore, there are practical constraints on the usable size of a window.
 
 \subsection{Crossing}
 
@@ -104,17 +104,18 @@ block = FullyCrossBlock([color, text, congruent],
 \begin{table}[b]
   \centering
   \caption{Example Trial Sequence}
-\begin{tabular}{cccc}
-Trial & Color & Text  & Congruent \\
-1     & blue  & green & no        \\
-2     & red   & red   & yes       \\
-3     & blue  & red   & no        \\
-4     & green & red   & no        \\
-5     & green & blue  & no        \\
-6     & blue  & blue  & yes       \\
-7     & red   & blue  & no        \\
-8     & red   & green & no        \\
-9     & green & green & yes
+\begin{tabular}{|c|c|c|c|}
+\hline
+Trial & Color & Text  & Congruent \\ \hline
+1     & blue  & green & no        \\ \hline
+2     & red   & red   & yes       \\ \hline
+3     & blue  & red   & no        \\ \hline
+4     & green & red   & no        \\ \hline
+5     & green & blue  & no        \\ \hline
+6     & blue  & blue  & yes       \\ \hline
+7     & red   & blue  & no        \\ \hline
+8     & red   & green & no        \\ \hline
+9     & green & green & yes       \\ \hline
 \end{tabular}
 \label{tab:example_sequence}
 \end{table}
@@ -122,13 +123,13 @@ Trial & Color & Text  & Congruent \\
 
 \section{Current Implementation}
 
-SweetPea encodes the experimental design in a boolean satisfiability (also known as SAT) formula such that any satisfying assignment represents a unique trial sequence that upholds the design. The assignment can then be translated back into the original design language for use as stimuli. At present SweetPea employs a simple positional encoding. In this encoding, a distinct variable represents every level of every factor of every trial. A SAT sampler is then applied to the formula to generate approximately uniformly distributed solutions.
+SweetPea encodes the experimental design in a Boolean satisfiability (also known as SAT) formula such that any satisfying assignment represents a unique trial sequence that upholds the design. The assignment can then be translated back into the original design language for use as stimuli. At present, SweetPea employs a simple positional encoding. In this encoding, a distinct variable represents every level of every factor of every trial. A SAT sampler is then applied to the formula to generate approximately uniformly distributed solutions.
 
 \subsection{Boolean Satisfiability}
 
 The Boolean satisfiability problem (abbreviated SAT) is the problem of determining whether or not a Boolean formula can be satisfied, or be caused to evaluate to true, by a particular true or false assignment to each of its variables. If a Boolean formula can encode the problem at hand, then techniques from satisfiability theory may be applied to determine whether or not a solution exists to the problem, or to locate a particular solution. Many different SAT solvers exist which accept a Boolean formula as input, and output either a solution to the formula or indicate that the formula is \textit{unsatisfiable}.
 
-A SAT formula contains some number of boolean variables and propositional logic clauses. A selection of true or false for each variable in the formula constitutes an \textit{assignment}. If a given assignment causes the entire formula to evaluate to true, then the formula is said to be \textit{satisfied} by that assignment, or more generally, the formula is \textit{satisfiable}. If no such assignment exists, the formula is said to be \textit{unsatisfiable}.
+A SAT formula contains some number of Boolean variables and propositional logic clauses. A selection of true or false for each variable in the formula constitutes an \textit{assignment}. If a given assignment causes the entire formula to evaluate to true, then the formula is said to be \textit{satisfied} by that assignment, or more generally, the formula is \textit{satisfiable}. If no such assignment exists, the formula is said to be \textit{unsatisfiable}.
 
 Tools for interacting with SAT formulas typically require the input formula to be in \textit{conjunctive normal form} (abbreviated CNF), which is a form of a Boolean formula with specific properties. A Boolean formula is in conjunctive normal form only when it meets three conditions: the entire formula must be a conjunction of clauses, each clause consists of an individual variable or a disjunction of variables, and the negation operator may only appear on individual variables, not entire clauses. Any Boolean formula may be expressed in conjunctive normal form, though converting an arbitrary formula to CNF usually requires growth in some dimension. SweetPea uses the Tseitin Transformation \cite{tseitin1983complexity} to do this conversion, which has the tightest known bounds on formula length, at the expense of allocating additional variables.
 
@@ -158,13 +159,13 @@ Continuing with the example design for the Stroop test introduced in Section 1.1
 
 In this encoding, if variable 68 is true, that corresponds to the level \texttt{red} being selected for the factor \texttt{text} in trial number 9. The encoding will also require variables 69 and 70 to be false in this case, as well as require variable 71 to be equivalent to 65. Once a solution is found, it is then decoded back into the original language of the design as a trial sequence. For more details concerning the current encoding scheme, refer to the original paper \cite{annie}.
 
-Once SweetPea generates the CNF encoding for a design, it applies a SAT sampler to the formula to generate some number of solutions. SAT samplers are similar to solvers, in that they produce satisfying assignments to a boolean formula; however, they guarantee some level of uniformity in the distribution of generated samples. Historically, SAT samplers could only provide strong uniformity guarantees for small formulas, but recent research shows some potential for improving the scalability of current sampling algorithms. SweetPea targets the SAT sampler \textit{UniGen}. SAT sampling will be discussed in further detail in Chapter 3.
+Once SweetPea generates the CNF encoding for a design, it applies a SAT sampler to the formula to generate some number of solutions. SAT samplers are similar to solvers, in that they produce satisfying assignments to a Boolean formula; however, they guarantee some level of uniformity in the distribution of generated samples. Historically, SAT samplers could only provide strong uniformity guarantees for small formulas, but recent research shows some potential for improving the scalability of current sampling algorithms. SweetPea targets the SAT sampler \textit{UniGen}. SAT sampling will be discussed in further detail in Chapter 3.
 
 \subsection{One-to-One Correspondence}
 
 In order for the uniformity guarantees of sampling tools to translate back into the problem space of the original experiment design, the encoding scheme must maintain a one-to-one relationship between formula solutions and distinct trial sequences. Without this relationship, it would be possible to uniformly sample solutions to the SAT formula while still introducing bias in the generated trial sequences. For example, if three SAT solutions yielded trial sequence $S_1$, while only one solution yielded trial sequence $S_2$, uniformly distributed solutions to the SAT formula would produce $S_1$ more frequently than $S_2$.
 
-A few observations build our confidence the encoding upholds this correspondence. First, all factor and level selections, including associated constraints for derived levels, in the original problem space are represented directly in the SAT encoding. A unique variable represents every level of every factor for every trial in the sequence. Clauses are added to the formula to ensure that variable assignments are consistent with the actual constraints of the problem. Referring back to the example in Table \ref{tab:encoding_diagram}, the levels for the \texttt{Color} factor for trial number 1 are represented by variables 1, 2, and 3 respectively. The SAT formula embeds a popcount, or Hamming weight, circuit that requires that exactly one of those variables be true. The encoding repeats this circuit for each of the nine trials for every factor. Other constraints are also embedded to represent all other rules of the design. Thes constraints enforce relationships between basic and derived factors, as well as guarantee that the full spectrum of crossed factor combinations appears in the sequence. Because SweetPea directly translates all data from the original design into SAT variables and constraints, we believe there is no risk of generating multiple solutions to the formula that represent the same trial sequence.
+A few observations build our confidence the encoding upholds this correspondence. First, all factor and level selections, including associated constraints for derived levels, in the original problem space are represented directly in the SAT encoding. A unique variable represents every level of every factor for every trial in the sequence. Clauses are added to the formula to ensure that variable assignments are consistent with the actual constraints of the problem. Referring back to the example in Table \ref{tab:encoding_diagram}, the levels for the \texttt{Color} factor for trial number 1 are represented by variables 1, 2, and 3, respectively. The SAT formula embeds a popcount, or Hamming weight, circuit that requires that exactly one of those variables be true. The encoding repeats this circuit for each of the nine trials for every factor. Other constraints are also embedded to represent all other rules of the design. Thes constraints enforce relationships between basic and derived factors, as well as guarantee that the full spectrum of crossed factor combinations appears in the sequence. Because SweetPea directly translates all data from the original design into SAT variables and constraints, we believe there is no risk of generating multiple solutions to the formula that represent the same trial sequence.
 
 However, some of these constraints are represented using operators prohibited in CNF, including logical implication. Of necessity, these expressions must be rewritten in an equivalent form using only those primitives allowed by CNF. In order to avoid an exponential explosion in the length of the formula, this rewriting process introduces additional variables to represent repeating clauses. The second observation is that SweetPea applies the Tseitin transformation to do this conversion to CNF, which binds every variable that it introduces to the state of a clause in the original formula. As a result, the number of solutions remains the same, and there is no possibility of underconstrained variables skewing the results.
 
@@ -187,7 +188,7 @@ SweetPea aims to solve both of these problems by providing a standard language f
 
 SweetPea sounds panacean, but it has yet to realize its objectives fully. The language is still under revision, but SweetPea shows excellent promise for fulfilling the first objective. On the other hand, uniform sampling of trial sequences has proven significantly more challenging. We hoped that leveraging recent developments in the field of SAT-sampling would allow us to solve this problem. However, the applicability of SAT samplers is fundamentally limited to formulas with solution counts below a particular threshold. Realistic designs routinely exceed this threshold.
 
-A solution to the formula represents a unique trial sequence in the design. Therefore every possible sequence permutation (so long as it upholds the design constraints) is also a distinct solution. Consequentially, the number of solutions grows factorially in the sequence length. In the previous example, the sequence length denoted $l$, was $9$. Without the congruence constraint, there would be $9! = 362,880$ solutions, which is still rather modest. Consider an experiment however in which $l = 36$. The solution count grows to $36! \approx 2^{138}$, which is many orders of magnitude larger. Table \ref{tab:factorial_explosion} shows how the number of solutions explodes as $l$ increases. As will be seen in Chapter 3, it is common for experimental designs to have sequence lengths even larger than 36.
+A solution to the formula represents a unique trial sequence in the design. Therefore, every possible sequence permutation (so long as it upholds the design constraints) is also a distinct solution. Consequentially, the number of solutions grows factorially in the sequence length. In the previous example, the sequence length denoted $l$ was $9$. Without the congruence constraint, there would be $9! = 362,880$ solutions, which is still rather modest. Consider an experiment, however, in which $l = 36$. The solution count grows to $36! \approx 2^{138}$, which is many orders of magnitude larger. Table \ref{tab:factorial_explosion} shows how the number of solutions explodes as $l$ increases. As will be seen in Chapter 3, it is common for experimental designs to have sequence lengths even larger than 36.
 
 \begin{table}[htb]
   \centering
@@ -210,4 +211,4 @@ A solution to the formula represents a unique trial sequence in the design. Ther
 
 In practice, designs have constraints; however, the constraints only exclude specific patterns in the permutations; therefore, the number of solutions remains dominated by $l!$. Furthermore, designs commonly contain several unconstrained factors, which magnifies the combinatorial explosion. Generating all possible solutions is not feasible.
 
-It has been well established that prior SAT-samplers have traded strong uniformity guarantees for scalability \cite{chakraborty_balancing_2014}, and thus were not suitable for even moderately sized formulas. Unigen \cite{chakraborty_balancing_2014} contributed two primary advancements to bridge this gap between scalability and uniformity guarantees, but these advancements require specific conditions that impose fundamental limits on the number of possible solutions to the formula. This thesis shows that experimental designs generally do not uphold these conditions, and therefore SAT samplers on their own are insufficient for generating uniformly distributed solutions. However, due to the combinatorial nature of these designs, arithmetic principles can be applied to directly construct uniformly distributed samples for some classes of experimental designs. Further success will likely involve a hybrid between sampling and construction approaches.
+It has been well established that prior SAT-samplers have traded strong uniformity guarantees for scalability \cite{chakraborty_balancing_2014}, and thus were not suitable for even moderately sized formulas. Unigen \cite{chakraborty_balancing_2014} contributed two primary advancements to bridge this gap between scalability and uniformity guarantees, but these advancements require specific conditions that impose fundamental limits on the number of possible solutions to the formula. This thesis shows that experimental designs generally do not uphold these conditions, and therefore, SAT samplers on their own are insufficient for generating uniformly distributed solutions. However, due to the combinatorial nature of these designs, arithmetic principles can be applied to directly construct uniformly distributed samples for some classes of experimental designs. Further success will likely involve a hybrid between sampling and construction approaches.
